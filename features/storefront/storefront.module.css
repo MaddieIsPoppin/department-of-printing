@@ -1,0 +1,248 @@
+.store {
+  --paper: #eeece5; --ink: #252622; --film: #353a3d; --muted: #65665e; --line: #c9c9bd; --olive: #d3d5c5;
+  --gutter: clamp(1.25rem, 4.5vw, 5rem); --space: clamp(4rem, 7vw, 7rem);
+  --display: var(--store-display), Impact, sans-serif; --mono: var(--font-geist-mono), monospace; --body: var(--font-geist-sans), sans-serif;
+  background: var(--paper); color: var(--ink); color-scheme: light; font-family: var(--body); overflow-x: clip;
+}
+.store * { box-sizing: border-box; }
+.store :is(a, button, input):focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.store :is(button, a) { -webkit-tap-highlight-color: transparent; }
+.store button:not(:disabled) { cursor: pointer; }
+.store section[id], .store footer[id] { scroll-margin-top: 1rem; }
+.store h1, .store h2, .store h3 { font-family: var(--display); font-weight: 600; letter-spacing: -.035em; }
+.micro { font: .65rem/1.7 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.body { font: clamp(.95rem, 1.2vw, 1.125rem)/1.75 var(--body); max-width: 29rem; }
+.action { display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 1rem; border-bottom: 1px solid currentColor; font: .72rem/1.5 var(--mono); text-transform: uppercase; }
+.action span { transition: transform 180ms ease-out; }
+.action:hover span { transform: translate(3px,-3px); }
+.skip { position: fixed; z-index: 30; top: 1rem; left: 1rem; padding: 1rem; background: var(--paper); color: var(--ink); transform: translateY(-200%); }
+.skip:focus { transform: none; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.header { padding: 1.75rem var(--gutter); min-height: 7rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; background: var(--film); color: var(--paper); }
+.brand { font: 600 1.3rem/1 var(--display); letter-spacing: -.035em; }
+.header nav { display: flex; align-items: center; gap: 2rem; font: .65rem/1.5 var(--mono); }
+.header nav a { padding-block: .75rem; }
+.header nav a:hover { text-decoration: underline; text-underline-offset: .4em; }
+.cart { opacity: .65; }
+.cart small { display: block; font-size: .5rem; text-align: right; }
+.footer { padding: 3rem var(--gutter); background: var(--ink); color: var(--paper); display: flex; justify-content: space-between; gap: 3rem; border-top: 1px solid #eeece52e; }
+.footer > div:first-child { max-width: 34rem; }
+.footer > div:first-child > p:last-child { font: .8rem/1.8 var(--body); margin-top: 1rem; color: #c4c5bb; }
+.footer a { display: inline-block; margin-top: 1rem; text-decoration: underline; text-underline-offset: .4em; }
+.hero { height: calc(100svh - 7rem); min-height: 38rem; position: relative; isolation: isolate; background: var(--film); color: var(--paper); overflow: clip; }
+.hero::after { content: "+"; position: absolute; top: 8%; right: var(--gutter); font: 1.25rem var(--mono); opacity: .5; pointer-events: none; }
+.film { position: relative; overflow: hidden; }
+.film video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.filmControl { position: absolute; right: 1rem; bottom: 1rem; z-index: 3; padding: .75rem; color: var(--paper); background: #252622c9; font: .6rem/1.5 var(--mono); }
+.heroFilm { position: absolute; inset: 0; z-index: -1; }
+.heroFilm video { position: absolute; width: 105%; height: 105%; top: -7%; left: 19%; max-width: none; }
+.heroFilm .filmControl { bottom: 7rem; right: var(--gutter); }
+.heroCopy { position: relative; padding: 5svh var(--gutter); width: 52%; }
+.heroCopy h1 { font-size: clamp(3.8rem, min(7.3vw, 11svh), 8rem); line-height: 1; margin-block: 2.5rem 2rem; }
+.heroCopy h1 span { display: block; white-space: nowrap; }
+.heroCopy .body { max-width: 17rem; }
+.heroPaths { position: absolute; bottom: 0; left: var(--gutter); right: var(--gutter); display: flex; gap: 3rem; align-items: center; padding-block: 1.5rem 2rem; }
+.heroPaths .micro { margin-left: auto; }
+.featured, .customTeaser { padding: var(--space) var(--gutter); position: relative; overflow: clip; }
+.sectionHeading { display: flex; justify-content: space-between; align-items: end; gap: 3rem; }
+.sectionHeading h2 { font-size: clamp(3rem,5.2vw,5.8rem); line-height: 1; margin-top: 1.5rem; }
+.sectionHeading > .action { margin-bottom: .5rem; }
+.featureStage { display: grid; grid-template-columns: 1.25fr 1fr; gap: 5vw; align-items: center; margin-top: 2rem; }
+.featureArt { position: relative; min-width: 0; padding: 2rem 0 1rem; --enter-x: 8%; --exit-x: -8%; }
+.featureArt[data-direction="previous"] { --enter-x: -8%; --exit-x: 8%; }
+.productHandoff { position: relative; width: min(82%, 30rem); margin-inline: auto; }
+.departingPiece { position: absolute; inset: 0; z-index: 2; pointer-events: none; animation: garment-out 180ms ease-in both; }
+.arrivingPiece { position: relative; animation: garment-in 400ms 80ms cubic-bezier(.2,.65,.3,1) both; }
+@keyframes garment-out { to { opacity: 0; transform: translateX(var(--exit-x)) scale(.98); } }
+@keyframes garment-in { from { opacity: 0; transform: translateX(var(--enter-x)) scale(.98); } to { opacity: 1; transform: none; } }
+.featureArt > .garmentImage, .featureArt > .productFilm { width: min(82%, 30rem); margin-inline: auto; }
+.featureArt > .micro { text-align: center; margin-top: 2rem; }
+.edition { position: absolute; left: -1rem; top: 0; font: 600 clamp(15rem,32vw,33rem)/1 var(--display); color: #dfdfd4; pointer-events: none; }
+.featureInfo { position: relative; padding-block: 2rem; }
+.featureInfo h3 { font-size: clamp(3rem,4.4vw,4.6rem); line-height: 1.06; min-height: 3.18em; max-width: 8em; margin-top: 1rem; }
+.featureBuy { margin-top: 1rem; max-width: 24rem; }
+.featureBuy > .action { width: 100%; margin-top: 1rem; }
+.price { font: .85rem/1.6 var(--mono); }
+.productControls { display: flex; align-items: center; justify-content: space-between; max-width: 24rem; margin-top: 2rem; }
+.productControls button { font: 1.5rem var(--mono); width: 3rem; height: 3rem; border: 1px solid var(--line); }
+.productControls button:hover { background: var(--ink); color: var(--paper); }
+.pieceIndex { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 3rem; }
+.pieceIndex button { border-top: 1px solid var(--line); text-align: left; padding-block: 1rem; font: .7rem/1.7 var(--mono); }
+.pieceIndex button span { display: block; font-size: .6rem; margin-bottom: .4rem; }
+.pieceIndex button[aria-pressed="true"] { border-color: var(--ink); border-width: 3px; font-weight: 700; }
+.garmentImage { position: relative; width: 100%; aspect-ratio: .78; }
+.garmentImage img { position: absolute; height: 112%; width: auto; max-width: none; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+.garmentImage[data-framing="scene"] img { width: 100%; height: 100%; object-fit: cover; }
+.productFilm { aspect-ratio: .78; }
+.customTeaser { background: var(--olive); }
+.teaserStage { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 7vw; margin-top: 4rem; }
+.creationObject { position: relative; width: 100%; aspect-ratio: .9; background: var(--film); overflow: hidden; }
+.creationObject > .garmentImage { height: 100%; aspect-ratio: auto; }
+.creationObject:has([data-framing="garment"]) { background: #c5c8b6; }
+.creationObject:has([data-framing="garment"]) > .garmentImage { width: 75%; height: auto; aspect-ratio: .78; margin: 6% auto 0; }
+.canvasLabel { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; text-align: center; font: .55rem/1.7 var(--mono); color: var(--paper); }
+.creationObject:has([data-framing="garment"]) .canvasLabel { color: var(--ink); }
+.printField { position: absolute; left: 30%; top: 29%; width: 40%; height: 33%; container-type: inline-size; }
+.samplePrint { position: absolute; transform: translate(-50%,-50%); width: 38%; aspect-ratio: 1; background: var(--paper); color: var(--ink); display: flex; flex-direction: column; justify-content: center; padding: 3%; touch-action: none; cursor: grab !important; user-select: none; container-type: inline-size; }
+.creationPreview { width: 100%; min-width: 0; }
+.labAdjustments { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; padding-block: 1.5rem; border-bottom: 1px solid var(--line); font: .6rem/1.7 var(--mono); }
+.labAdjustments label { flex: 1; min-width: 7rem; }
+.labAdjustments output { float: right; }
+.labAdjustments input { display: block; width: 100%; height: 2.5rem; accent-color: var(--ink); }
+.labAdjustments button { min-height: 44px; padding-inline: .5rem; text-decoration: underline; text-underline-offset: .4em; }
+.footer nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.motionWorld { position: relative; }
+.studioGrid { position: fixed; inset: -12px var(--gutter); z-index: 8; pointer-events: none; color: white; mix-blend-mode: difference; opacity: .12; border-inline: 1px solid currentColor; }
+.studioGrid span { position: absolute; font: 1rem var(--mono); }
+.studioGrid span:nth-child(1) { top: 28%; left: -.35rem; }
+.studioGrid span:nth-child(2) { top: 28%; right: -.35rem; }
+.studioGrid span:nth-child(3) { bottom: 28%; left: -.35rem; }
+.studioGrid span:nth-child(4) { bottom: 28%; right: -.35rem; }
+.routeRule { position: fixed; inset: 0 0 auto; height: 2px; background: white; mix-blend-mode: difference; z-index: 20; pointer-events: none; }
+.motionWorld main > section h2 { position: relative; }
+.motionWorld main > section h2::before { content: ""; position: absolute; top: -.6rem; left: 0; width: 3rem; height: 1px; background: currentColor; opacity: .35; transform: scaleX(var(--rule-scale, 1)); transform-origin: left; }
+.samplePrint span { font: 600 37cqw/1 var(--display); text-align: left; }
+.samplePrint { height: 38cqw; overflow: hidden; }
+.samplePrint small { font: 5cqw/1.5 var(--mono); margin-top: 8cqw; }
+.samplePrint:active { cursor: grabbing !important; }
+.creationInfo h3 { white-space: pre-line; font-size: clamp(3rem,4.4vw,5rem); line-height: 1; margin-block: 2rem; }
+.garmentTabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+.garmentTabs button { border-bottom: 1px solid currentColor; padding: .8rem 1rem; font: .7rem/1.5 var(--mono); text-transform: uppercase; }
+.garmentTabs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.creationObject .garmentTabs { position: absolute; top: .5rem; left: 1rem; right: 1rem; margin: 0; z-index: 2; color: var(--paper); }
+.creationObject .garmentTabs button { background: var(--film); }
+.creationObject .garmentTabs button[aria-pressed="true"] { color: var(--ink); background: var(--paper); }
+.addPrint { display: block; padding: 1rem 1.5rem; border: 1px solid currentColor; margin-top: 2rem; font: .75rem/1.5 var(--mono); }
+.addPrint:hover { background: var(--ink); color: var(--paper); }
+.creationObject .addPrint { position: absolute; bottom: 3rem; right: 1rem; margin: 0; background: var(--paper); color: var(--ink); padding: .75rem 1rem; }
+.help { font: .7rem/1.8 var(--mono); max-width: 30rem; margin-block: 1rem; }
+.creationInfo > .action { margin-top: 1rem; }
+.finale { background: var(--ink); color: var(--paper); padding: var(--space) var(--gutter); }
+.finale h2 { font-size: clamp(3.5rem,8.5vw,10rem); line-height: 1; margin-block: 3rem; }
+.finale h2 span { color: #c3c9a9; }
+.finalPaths { display: flex; gap: 4rem; margin-top: 4rem; }
+.finalPaths > a { min-width: 19rem; }
+.catalogue, .productPage { padding: var(--space) var(--gutter); }
+.pageHeading { padding-bottom: 4rem; }
+.pageHeading h1 { font-size: clamp(4rem,8vw,8rem); line-height: 1; margin-block: 1.5rem 2rem; }
+.catalogue { padding-top: 3rem; }
+.catalogue .pageHeading { padding-bottom: 2rem; }
+.catalogue .pageHeading h1 { font-size: clamp(3rem,5vw,5.5rem); margin-block: 1rem; }
+.catalogueBar { display: flex; align-items: center; justify-content: space-between; gap: 2rem; border-block: 1px solid var(--line); padding-block: 1rem; }
+.catalogueBar nav { display: flex; gap: 2rem; font: .7rem/1.5 var(--mono); }
+.catalogueBar nav a { padding-block: .75rem; }
+.catalogueBar nav a[aria-current="page"] { border-bottom: 2px solid var(--ink); }
+.catalogueGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem 4vw; padding-top: 3rem; }
+.catalogueItem { min-width: 0; }
+.catalogueImage { position: relative; overflow: hidden; display: block; background: #e0e1d6; padding: 4rem 2rem 3rem; }
+.catalogueImage .garmentImage { width: 78%; margin-inline: auto; transition: transform 250ms ease-out; }
+.catalogueImage:hover .garmentImage { transform: scale(1.025); }
+.itemNumber { position: absolute; top: 1.5rem; left: 1.5rem; font: .6rem/1.6 var(--mono); z-index: 2; }
+.alternate { position: absolute; inset: 4rem 2rem 3rem; opacity: 0; transition: opacity 200ms; background: #e0e1d6; }
+.catalogueImage:has(.alternate):is(:hover,:focus-visible) .alternate { opacity: 1; }
+.viewPiece { position: absolute; right: 1.5rem; bottom: 1.5rem; font: .65rem/1.5 var(--mono); border-bottom: 1px solid currentColor; padding-block: .5rem; }
+.itemInfo { padding-block: 1.5rem; border-bottom: 1px solid var(--line); }
+.itemInfo h2 { font-size: clamp(2rem,3vw,3rem); line-height: 1.1; margin-block: .75rem 1rem; }
+.availability { font: .6rem/1.6 var(--mono); color: var(--muted); margin-top: .5rem; }
+.catalogueEnd { display: flex; justify-content: space-between; align-items: center; padding-block: 5rem 0; }
+.catalogueEnd p { font: 600 2rem/1.2 var(--display); }
+.backLink { display: inline-block; font: .65rem/1.5 var(--mono); padding-block: .75rem; }
+.productDetail { display: grid; grid-template-columns: 1.15fr 1fr; gap: 6vw; align-items: start; margin-top: 3rem; }
+.detailMedia { overflow: hidden; padding: 2rem; background: #e0e1d6; }
+.detailInfo { padding-top: 1rem; }
+.detailInfo h1 { font-size: clamp(3rem,5vw,5rem); line-height: 1; margin-block: 1.5rem; }
+.detailInfo > .body { margin-block: 2rem; }
+.detailInfo > .action { margin-top: 1rem; }
+.productOptions { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-block: 2rem; }
+.productOptions dt { font: .6rem/1.5 var(--mono); border-top: 1px solid var(--line); padding-top: 1rem; }
+.productOptions dd { font: .85rem/1.6 var(--body); margin-top: .5rem; }
+.contactPending { padding-block: 1rem; max-width: 30rem; }
+.contactPending button { padding: 1rem; border: 1px solid currentColor; font: .7rem/1.5 var(--mono); opacity: .65; cursor: not-allowed; }
+.contactPending p { font: .7rem/1.8 var(--mono); margin-top: 1rem; }
+.additionalViews { padding-top: 5rem; max-width: 40rem; margin-inline: auto; }
+.additionalViews figcaption { padding-top: 2rem; }
+.customIntro { padding: var(--space) var(--gutter); background: var(--olive); }
+.customIntro h1 { font-size: clamp(3rem,6vw,6.5rem); line-height: 1.08; max-width: 17em; margin-block: 2rem 3rem; }
+.customIntro h1 span { display: block; }
+.customIntro > div { display: flex; justify-content: space-between; align-items: end; gap: 3rem; }
+.customIntro + .customTeaser { padding-top: 0; }
+.customIntro + .customTeaser .teaserStage { margin-top: 0; }
+.customStart { padding: var(--space) var(--gutter); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; background: var(--ink); color: var(--paper); }
+.customStart h2 { font-size: clamp(3rem,4.5vw,5rem); line-height: 1.05; margin-top: 1.5rem; }
+.customStart > div:last-child { align-self: center; }
+@media (max-width: 999px) {
+  .header > .micro { display: none; }
+  .header nav { gap: 1.25rem; }
+  .heroCopy { width: 60%; }
+  .heroCopy h1 { font-size: 8vw; }
+  .heroPaths { gap: 2rem; }
+  .featureStage { gap: 3vw; }
+  .featureInfo h3 { font-size: 3.2rem; }
+  .sectionHeading > .body { max-width: 19rem; }
+  .pieceIndex { gap: .75rem; }
+  .teaserStage { gap: 3rem; }
+  .garmentTabs button { padding-inline: .6rem; }
+  .creationInfo h3 { font-size: 3.5rem; }
+  .catalogueImage { padding-inline: 1rem; }
+  .alternate { inset-inline: 1rem; }
+}
+@media (max-width: 650px) {
+  .header { min-height: 6rem; gap: 1rem; padding-block: 1.5rem; }
+  .brand { font-size: 1.1rem; }
+  .header nav { gap: .85rem; font-size: .6rem; }
+  .cart { display: none; }
+  .hero { height: calc(100svh - 6rem); min-height: 43rem; }
+  .heroCopy { width: 100%; padding-top: 1.5rem; }
+  .heroCopy h1 { font-size: 12vw; margin-block: 1.5rem 1rem; }
+  .heroCopy .body { font-size: .8rem; max-width: 15rem; }
+  .heroFilm { top: 11rem; bottom: 6.5rem; }
+  .heroFilm video { width: 170%; left: -30%; height: 100%; top: 0; }
+  .heroFilm .filmControl { bottom: .5rem; right: .6rem; font-size: .5rem; }
+  .heroPaths { flex-wrap: wrap; gap: 1rem 1.5rem; padding-bottom: 1.5rem; }
+  .heroPaths .action { font-size: .6rem; gap: 1rem; }
+  .heroPaths .micro { display: none; }
+  .sectionHeading { display: block; }
+  .sectionHeading h2 { font-size: 12vw; }
+  .sectionHeading > .action, .sectionHeading > .body { margin-top: 1.5rem; }
+  .featureStage { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+  .featureArt { width: 100%; padding-top: 1rem; }
+  .featureArt > .garmentImage, .featureArt > .productFilm { width: 77%; }
+  .productHandoff { width: 77%; }
+  .edition { font-size: 70vw; left: 0; }
+  .featureArt > .micro { margin-top: 1.5rem; }
+  .featureInfo { width: 100%; padding-block: 1rem 0; }
+  .featureInfo h3 { font-size: 2.75rem; min-height: 2.12em; max-width: none; }
+  .featureBuy, .productControls { max-width: none; }
+  .pieceIndex { grid-template-columns: 1fr 1fr; margin-top: 2rem; }
+  .pieceIndex button { font-size: .6rem; }
+  .teaserStage { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+  .creationObject { width: 100%; }
+  .creationInfo { width: 100%; }
+  .creationInfo h3 { font-size: 12vw; }
+  .finale h2 { font-size: 12.5vw; margin-block: 2rem; }
+  .finalPaths { flex-direction: column; gap: 1rem; margin-top: 3rem; }
+  .finalPaths > a { min-width: 0; }
+  .footer { flex-direction: column; gap: 2rem; }
+  .pageHeading h1 { font-size: 17vw; }
+  .catalogueBar { align-items: start; flex-direction: column; gap: .5rem; }
+  .catalogueBar nav { width: 100%; justify-content: space-between; gap: 1rem; font-size: .65rem; }
+  .catalogueGrid { grid-template-columns: 1fr; gap: 2rem; }
+  .catalogueImage .garmentImage { width: 84%; }
+  .catalogue .pageHeading h1 { font-size: 12vw; }
+  .itemInfo h2 { font-size: 2.3rem; }
+  .catalogueEnd { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+  .productDetail { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+  .detailMedia { padding: 2rem 1rem; }
+  .detailInfo h1 { font-size: 13vw; }
+  .customIntro h1 { font-size: 12vw; }
+  .customIntro > div { display: block; }
+  .customIntro .action { margin-top: 2rem; }
+  .customStart { grid-template-columns: 1fr; gap: 2rem; }
+  .customStart h2 { font-size: 12vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .store *, .store *::before, .store *::after { animation: none !important; transition: none !important; }
+  .filmControl { display: none; }
+  .departingPiece { display: none; }
+  .catalogueImage:hover .garmentImage, .action:hover span { transform: none; }
+}
