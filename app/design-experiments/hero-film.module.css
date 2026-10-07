@@ -1,0 +1,34 @@
+.hero { position: relative; overflow: clip; background: #353a3d; color: var(--paper); padding-inline: var(--gutter); }
+.hero header { position: relative; z-index: 3; }
+.stage { position: relative; min-height: 42rem; height: calc(100svh - 13rem); isolation: isolate; }
+.film { position: absolute; inset: -7rem calc(-1 * var(--gutter)) 0; overflow: hidden; z-index: -1; }
+.film video { position: absolute; height: 112%; width: 100%; object-fit: cover; object-position: 35% center; left: 17%; top: -5%; max-width: none; }
+.copy { position: relative; padding-block: 2rem; width: 42%; }
+.copy h1 { font: 600 clamp(4rem, min(8.2vw, 13svh), 9rem)/.95 var(--display); letter-spacing: -.05em; margin-block: 2rem; }
+.copy h1 span { display: block; }
+.caption { font: .9rem/1.6 var(--body); max-width: 18rem; }
+.filmNote { position: absolute; bottom: 1.75rem; right: 0; display: flex; align-items: center; gap: 2rem; }
+.filmNote button, .bottom a { font: .65rem/1.6 var(--mono); padding-block: .8rem; cursor: pointer; text-underline-offset: .4em; }
+.filmNote button { border-bottom: 1px solid currentColor; }
+.filmNote button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.bottom { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.5rem; }
+@media (max-width: 899px) {
+  .hero header > p { display: none; }
+  .copy h1 { font-size: 10vw; }
+  .film video { left: 12%; width: 120%; object-position: center; }
+  .stage { min-height: 42rem; }
+}
+@media (max-width: 599px) {
+  .hero header nav { gap: .75rem; }
+  .stage { height: auto; min-height: 46rem; }
+  .copy { width: 100%; padding-top: 1rem; }
+  .copy h1 { font-size: 17vw; margin-top: 1.5rem; }
+  .caption { position: absolute; top: 39rem; font-size: .8rem; }
+  .film { inset: 13rem calc(-1 * var(--gutter)) 4rem; }
+  .film video { width: 160%; height: 100%; top: 0; left: -18%; object-fit: cover; object-position: center; }
+  .filmNote { bottom: .3rem; right: 0; }
+  .filmNote > span { display: none; }
+  .bottom { flex-wrap: wrap; padding-top: .75rem; }
+  .bottom > p { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .filmNote button { display: none; } }

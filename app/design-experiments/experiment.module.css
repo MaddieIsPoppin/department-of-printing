@@ -1,0 +1,379 @@
+.experiment {
+  --paper: #eeece5;
+  --surface: #e2e0d7;
+  --ink: #252622;
+  --muted: #62635b;
+  --line: #c5c5bb;
+  --dark: #30312c;
+  --on-dark-muted: #bcbdb2;
+  --accent: #c0ca91;
+  --gutter: clamp(1.25rem, 4.5vw, 5rem);
+  --display: var(--v2-display), Impact, sans-serif;
+  --mono: var(--font-geist-mono), monospace;
+  --body: var(--font-geist-sans), Arial, sans-serif;
+  color-scheme: light;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body);
+  overflow-x: clip;
+}
+.experiment :is(a, summary):focus-visible { outline: 2px solid currentColor; outline-offset: 7px; }
+.experiment :is(section, footer)[id] { scroll-margin-top: 1.5rem; }
+.meta { font: 500 .65rem/1.65 var(--mono); letter-spacing: .065em; }
+.body { font-size: clamp(.95rem, 1.2vw, 1.125rem); line-height: 1.75; max-width: 24rem; }
+.skip { position: absolute; top: 1rem; left: 1rem; z-index: 20; background: var(--paper); padding: 1rem; transform: translateY(-200%); }
+.skip:focus { transform: none; }
+.hero { min-height: 100svh; display: flex; flex-direction: column; padding: 0 var(--gutter); }
+.header { display: flex; justify-content: space-between; align-items: center; gap: 2rem; min-height: 7rem; position: relative; z-index: 5; }
+.brand { font: 600 1.25rem/1.05 var(--display); letter-spacing: -.035em; }
+.header nav { display: flex; gap: clamp(1rem, 2.5vw, 3rem); font: 500 .7rem/1.5 var(--mono); }
+.header nav a { padding-block: .85rem; }
+.header nav a, .textLink, .footer a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .4em; transition: text-decoration-color 180ms; }
+.header nav a:hover, .textLink:hover, .footer a:hover { text-decoration-color: currentColor; }
+.heroStage { position: relative; flex: 1; min-height: max(36rem, calc(100svh - 14rem)); }
+.heroKicker { position: absolute; top: 2%; left: 0; }
+.heroTitle { position: relative; padding-top: 4.5rem; font: 600 clamp(5rem, min(13.8vw, calc((100svh - 22rem) / 3)), 14rem)/.98 var(--display); letter-spacing: -.052em; }
+.heroTitle > span { display: block; position: relative; width: max-content; max-width: 100%; }
+.heroTitle > span:nth-child(2) { margin-left: 4vw; }
+.heroTitle .heroFront { z-index: 3; margin-left: 24vw; color: var(--paper); mix-blend-mode: difference; }
+.heroGarment { position: absolute; width: min(48vw, 64svh); top: -2rem; right: 6vw; z-index: 2; transform: rotate(-9deg); pointer-events: none; }
+.garment { position: relative; width: 100%; aspect-ratio: .78; }
+.garmentImage { position: absolute; left: 50%; top: 50%; height: 112%; width: auto; max-width: none; transform: translate(-50%, -50%); }
+.heroSide { position: absolute; right: 0; top: 62%; z-index: 4; text-align: right; color: var(--paper); mix-blend-mode: difference; }
+.heroCaption { font-size: clamp(1rem, 1.4vw, 1.4rem); line-height: 1.4; margin-top: 1.75rem; }
+.heroBottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding: 2rem 0; position: relative; z-index: 4; }
+.heroBottom p span { color: var(--muted); }
+.heroBottom a { padding: .75rem 0 .75rem 2rem; }
+.heroBottom a span { margin-left: 2rem; }
+.textLink { font: 500 .7rem/1.5 var(--mono); padding-block: .75rem; }
+.textLink span { margin-left: 1rem; }
+.technical { position: relative; background: var(--dark); color: var(--paper); padding: 3rem var(--gutter) 2rem; }
+.sectionTop { display: flex; justify-content: space-between; align-items: start; gap: 2rem; }
+.technicalTitle { position: relative; z-index: 2; font: 600 clamp(4rem, 8vw, 9rem)/1.02 var(--display); letter-spacing: -.045em; margin-top: 4rem; pointer-events: none; }
+.technicalTitle span { color: var(--on-dark-muted); }
+.technicalStage { position: relative; min-height: 48vw; margin-top: -12rem; }
+.technicalGarment { position: relative; width: 45%; margin-inline: auto; transform: rotate(6deg); }
+.specifications > div { position: absolute; width: 21%; z-index: 3; }
+.specifications dt { font: .6rem/1.6 var(--mono); color: var(--on-dark-muted); }
+.specifications dd { font: 500 clamp(.85rem, 1.3vw, 1.125rem)/1.6 var(--mono); margin-top: .5rem; }
+.spec0 { top: 40%; left: 0; }
+.spec1 { top: 23%; right: 0; }
+.spec2 { top: 73%; left: 4%; }
+.spec3 { top: 68%; right: 0; }
+.connector { position: absolute; left: 0; top: -.75rem; width: 150%; height: 1px; background: var(--on-dark-muted); }
+.spec1 .connector, .spec3 .connector { right: 0; left: auto; }
+.connector::after { content: ""; position: absolute; right: 0; top: -2px; width: 5px; height: 5px; background: var(--paper); }
+.spec1 .connector::after, .spec3 .connector::after { left: 0; right: auto; }
+.technicalIndex { position: absolute; right: 7%; bottom: 0; color: var(--on-dark-muted); }
+.disclaimer { color: var(--on-dark-muted); margin-top: 3rem; max-width: 38rem; }
+.lab { background: var(--ink); color: var(--paper); padding: 3rem var(--gutter) 0; position: relative; }
+.labComposition { position: relative; margin-top: 4rem; }
+.lab h2 { position: relative; font: 600 clamp(4rem, 10.5vw, 12rem)/1.02 var(--display); letter-spacing: -.035em; }
+.lab h2 span { position: relative; display: block; width: max-content; max-width: 100%; }
+.lab h2 span:nth-child(2) { margin-left: 7vw; }
+.lab h2 .labFront { z-index: 3; mix-blend-mode: difference; }
+.labGarment { position: absolute; right: 4vw; top: -5rem; width: 42%; transform: rotate(10deg); z-index: 2; pointer-events: none; }
+.labCta { position: relative; z-index: 4; margin-top: 3rem; max-width: 34rem; }
+.labCta summary { list-style: none; display: flex; justify-content: space-between; gap: 3rem; padding: 1.4rem 0; border-block: 1px solid var(--on-dark-muted); cursor: pointer; font: 500 .8rem/1.5 var(--mono); }
+.labCta summary::-webkit-details-marker { display: none; }
+.labCta summary span { transition: transform 200ms; }
+.labCta summary:hover span { transform: translate(3px, -3px); }
+.labCta p { color: var(--on-dark-muted); line-height: 1.7; font-size: .875rem; padding-block: 1rem; }
+.footer { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-top: 6rem; padding-block: 2rem; color: var(--on-dark-muted); }
+.footer a { padding-block: .75rem; }
+.story { background: var(--surface); position: relative; }
+.storyStage { position: relative; }
+.storyObjects { display: none; }
+.storyStep { position: relative; min-height: 80svh; padding: 5rem var(--gutter); display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; overflow: clip; }
+.frameCopy { position: relative; z-index: 2; }
+.storyStep h2 { font: 600 clamp(3.5rem, 7.5vw, 8rem)/1.02 var(--display); letter-spacing: -.045em; margin-block: 1.5rem; }
+.storyStep h2 span { display: block; }
+.storyStep .body { max-width: 22rem; }
+.staticGarment { width: 75%; justify-self: center; }
+.frame1 .frameCopy { grid-column: 2; grid-row: 1; }
+.frame1 .staticGarment { grid-column: 1; grid-row: 1; transform: rotate(7deg); }
+.frame2 .staticGarment { width: 115%; transform: rotate(-8deg); }
+.frame3 { background: var(--paper); }
+.frameNote { position: absolute; bottom: 2rem; left: var(--gutter); color: var(--muted); }
+.storyFootnote { padding: 2rem var(--gutter); color: var(--muted); }
+.story[data-motion] { height: 280svh; }
+.story[data-motion] .storyStage { height: 100svh; position: sticky; top: 0; overflow: clip; }
+.story[data-motion] .storyObjects { display: block; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.traveller { position: absolute; width: min(42vw, 62svh); left: calc(50% - min(21vw, 31svh)); top: 9svh; }
+.story[data-motion] .storyStep { position: absolute; inset: 0; display: block; padding: 0; min-height: 0; background: none; overflow: visible; }
+.story[data-motion] .storySteps { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.story[data-motion] .frame0 h2 { font-size: 6vw; }
+.story[data-motion] .frameCopy { position: absolute; left: var(--gutter); top: 22%; }
+.story[data-motion] .frame0 .frameCopy { max-width: 43%; }
+.story[data-motion] .frame1 .frameCopy { left: 58%; top: 30%; }
+.story[data-motion] .frame2 .frameCopy { left: 58%; top: 15%; }
+.story[data-motion] .frame3 .frameCopy { top: 8%; left: var(--gutter); right: var(--gutter); }
+.story[data-motion] .frame3 h2 { font-size: 20vw; letter-spacing: -.06em; }
+.story[data-motion] .frame3 .body { margin-top: 1rem; max-width: 17rem; }
+.story[data-motion] .staticGarment { display: none; }
+.story[data-motion] .frameNote { bottom: 8%; z-index: 4; }
+.story[data-motion] .storyFootnote { position: absolute; bottom: 0; right: 0; text-align: right; z-index: 4; }
+.collectionIntro { padding: 6rem var(--gutter) 5rem; background: var(--dark); color: var(--paper); display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.collectionIntro > .meta { grid-column: 1 / -1; }
+.collectionIntro h2 { font: 600 clamp(3rem, 7vw, 8rem)/1.05 var(--display); letter-spacing: -.035em; }
+.collectionIntro h2 span { color: var(--on-dark-muted); }
+.collectionIntro .body { justify-self: end; align-self: end; }
+.ratioSequence { background: var(--dark); }
+.ratioStage { position: relative; overflow: clip; padding: 4rem var(--gutter); min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.ratioPaper { position: absolute; inset: 0 0 0 50%; background: var(--paper); }
+.ratioHeading { position: relative; color: var(--paper); z-index: 3; grid-column: 1 / -1; mix-blend-mode: difference; }
+.ratioHeading h3 { font: 600 clamp(2.5rem, 5vw, 6rem)/1.05 var(--display); margin-top: 1rem; letter-spacing: -.03em; }
+.ratioBlack, .ratioWhite { width: 70%; position: relative; justify-self: center; }
+.ratioLabels { position: relative; grid-column: 1 / -1; display: flex; justify-content: space-between; color: var(--paper); mix-blend-mode: difference; z-index: 3; }
+.ratioNote { position: relative; grid-column: 1 / -1; color: var(--paper); mix-blend-mode: difference; z-index: 3; }
+.ratioSequence[data-motion] { height: 160svh; }
+.ratioSequence[data-motion] .ratioStage { height: 100svh; position: sticky; top: 0; display: block; }
+.ratioSequence[data-motion] .ratioPaper { inset: 0; }
+.ratioSequence[data-motion] .ratioHeading { position: absolute; left: var(--gutter); top: 8%; }
+.ratioSequence[data-motion] :is(.ratioBlack, .ratioWhite) { position: absolute; width: min(42vw, 68svh); left: 42%; top: 6%; }
+.ratioSequence[data-motion] .ratioLabels { position: absolute; bottom: 7%; left: var(--gutter); right: var(--gutter); }
+.ratioSequence[data-motion] .ratioNote { position: absolute; left: var(--gutter); bottom: 17%; }
+.faithStudy { position: relative; min-height: 110svh; padding: 4rem var(--gutter); }
+.faithStudy h3 { font: 600 clamp(4rem, 10vw, 11rem)/1.04 var(--display); letter-spacing: -.045em; margin-top: 8rem; }
+.faithStudy h3 span { color: var(--muted); }
+.faithObject { position: absolute; width: 19%; right: 17%; top: 31%; display: block; }
+.faithObject .garment { transition: transform 300ms; }
+.faithObject:is(:hover, :focus-visible) .garment { transform: rotate(-4deg) scale(1.04); }
+.studyLink { display: block; font: .65rem/1.7 var(--mono); margin-top: 2rem; text-align: center; }
+.faithNote { position: absolute; right: var(--gutter); bottom: 4rem; color: var(--muted); }
+.growthStudy { position: relative; min-height: 110svh; overflow: clip; background: var(--surface); padding: 3rem var(--gutter); }
+.growthStudy > .meta { position: relative; z-index: 3; }
+.growthStudy h3 { font: 600 clamp(5rem, 19vw, 22rem)/.95 var(--display); letter-spacing: -.055em; margin-top: 13%; }
+.growthObject { position: absolute; width: 60%; right: -8%; top: -12%; transform: rotate(9deg); pointer-events: none; }
+.growthStudy .textLink { position: absolute; bottom: 4rem; left: var(--gutter); z-index: 3; }
+.growthStudy .growthNote { position: absolute; right: var(--gutter); bottom: 4rem; max-width: 17rem; z-index: 3; }
+.studyFinal { position: relative; min-height: 100svh; padding: 6rem var(--gutter); background: var(--ink); color: var(--paper); overflow: clip; }
+.finalCopy { position: relative; z-index: 3; }
+.studyFinal h3 { font: 600 clamp(3.5rem, 8vw, 9rem)/1.05 var(--display); letter-spacing: -.04em; margin-block: 2rem; }
+.studyFinal .textLink { display: inline-block; margin-top: 2rem; }
+.studyObject { position: absolute; width: 46%; right: -1%; top: 5%; transform: rotate(-5deg); }
+.studyFooter { position: absolute; bottom: 2rem; left: var(--gutter); color: var(--on-dark-muted); }
+.labPrelude { margin-top: 3rem; color: var(--on-dark-muted); font-size: clamp(1rem, 2vw, 1.5rem); }
+@media (max-width: 899px) {
+  .heroGarment { width: 53%; right: 0; top: 3rem; }
+  .storyStep { min-height: 65svh; padding-block: 4rem; gap: 1rem; }
+  .storyStep h2 { font-size: clamp(2.5rem, 6vw, 4rem); }
+  .storyStep .body { font-size: .9rem; }
+  .staticGarment { width: 90%; }
+  .collectionIntro { grid-template-columns: 1fr; }
+  .collectionIntro .body { justify-self: start; }
+  .ratioStage { min-height: auto; }
+  .faithStudy { min-height: 65rem; }
+  .faithObject { width: 25%; right: 12%; top: 45%; }
+  .growthStudy { min-height: 60rem; }
+  .growthObject { width: 75%; top: 10%; right: -15%; }
+  .growthStudy .growthNote { bottom: 8rem; }
+  .studyFinal { min-height: 60rem; }
+  .studyObject { width: 60%; top: 17rem; right: -10%; }
+  .headerNote { display: none; }
+  .heroStage { min-height: 76vw; }
+  .heroTitle { padding-top: 4rem; font-size: clamp(5rem, 13.8vw, 14rem); }
+  .heroSide { top: auto; bottom: 0; }
+  .technicalTitle { margin-top: 3rem; }
+  .technicalStage { margin-top: -4rem; }
+  .technicalGarment { width: 80%; }
+  .specifications { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding-top: 2rem; }
+  .specifications > div { position: relative; top: auto; left: auto; right: auto; width: auto; }
+  .connector { width: 100%; }
+  .technicalIndex { display: none; }
+  .labGarment { top: 0; width: 66%; }
+  .footer { flex-wrap: wrap; }
+}
+@media (max-width: 599px) {
+  .storyStep { display: block; padding: 3rem var(--gutter) 5rem; min-height: 0; }
+  .storyStep h2 { font-size: clamp(3rem, 12vw, 4rem); }
+  .staticGarment { width: 67%; margin: 2rem 0 0 auto; }
+  .frame1 .frameCopy { text-align: right; }
+  .frame1 .staticGarment { width: 75%; margin-left: -5%; margin-right: auto; }
+  .frame2 .staticGarment { width: 95%; margin-left: 17%; }
+  .frame3 h2 { font-size: 19vw; }
+  .frame3 .staticGarment { width: 65%; margin-inline: auto; }
+  .frameNote { bottom: 1.5rem; font-size: .55rem; }
+  .collectionIntro { padding-block: 3rem; }
+  .collectionIntro h2 { font-size: 14vw; }
+  .ratioStage { gap: 1rem; padding-block: 3rem; }
+  .ratioHeading h3 { font-size: 12vw; }
+  .ratioBlack, .ratioWhite { width: 100%; }
+  .ratioWhite { margin-top: 7rem; }
+  .ratioLabels .meta, .ratioNote { font-size: .55rem; }
+  .faithStudy { min-height: 47rem; padding-top: 3rem; }
+  .faithStudy h3 { font-size: 17vw; margin-top: 3rem; }
+  .faithObject { width: 36%; right: 12%; top: 24rem; }
+  .studyLink { font-size: .55rem; margin-top: 1rem; }
+  .faithNote { left: var(--gutter); right: auto; bottom: 2rem; font-size: .55rem; max-width: 11rem; }
+  .growthStudy { min-height: 47rem; }
+  .growthStudy h3 { font-size: 23vw; margin-top: 3rem; }
+  .growthObject { width: 100%; right: -20%; top: 12rem; }
+  .growthStudy .growthNote { left: var(--gutter); right: auto; bottom: 5rem; font-size: .55rem; }
+  .growthStudy .textLink { bottom: 2rem; }
+  .studyFinal { min-height: 52rem; padding-top: 3rem; }
+  .studyFinal h3 { font-size: 13vw; }
+  .studyObject { width: 73%; top: 25rem; right: -2%; }
+  .studyFooter { font-size: .5rem; }
+  .header { flex-wrap: wrap; gap: 1.25rem; padding-block: 1.5rem; }
+  .brand { font-size: 1.1rem; }
+  .header nav { gap: 1rem; font-size: .6rem; }
+  .hero { min-height: 100svh; }
+  .heroStage { min-height: 38rem; }
+  .heroKicker { top: 1rem; }
+  .heroTitle { font-size: clamp(3.5rem, 16vw, 6rem); padding-top: 3.5rem; line-height: 1.05; }
+  .heroTitle > span:nth-child(2) { margin-left: 0; }
+  .heroTitle .heroFront { margin-left: 0; margin-top: 14rem; }
+  .heroGarment { top: 10rem; right: -2%; width: 77%; max-width: 30rem; transform: rotate(-5deg); }
+  .heroCaption { margin-top: 1rem; font-size: 1rem; }
+  .heroSide, .version { display: none; }
+  .heroBottom { padding-block: 1.5rem; }
+  .storyStep { gap: 1rem; }
+  .storyStep h2 { font-size: clamp(3rem, 13vw, 5rem); }
+  .sectionTop { flex-direction: column; gap: .5rem; }
+  .technicalTitle { font-size: clamp(3.5rem, 16vw, 5rem); }
+  .technicalStage { margin-top: 0; }
+  .technicalGarment { width: 110%; margin-left: -5%; }
+  .specifications { grid-template-columns: 1fr 1fr; gap: 3rem 1.5rem; padding-top: 2rem; }
+  .specifications dd { font-size: .85rem; }
+  .disclaimer { font-size: .6rem; }
+  .labComposition { margin-top: 3rem; padding-top: 0; }
+  .lab h2 { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+  .lab h2 span:nth-child(2) { margin-left: 0; }
+  .lab h2 span:nth-child(3) { margin-top: 11rem; }
+  .labGarment { top: 6rem; right: -4%; width: 65%; }
+  .labCta { margin-top: 2rem; }
+  .footer { align-items: start; flex-direction: column; margin-top: 4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experiment *, .experiment *::before, .experiment *::after { animation: none !important; transition: none !important; }
+  .faithObject:is(:hover, :focus-visible) .garment, .labCta summary:hover span { transform: none; }
+}
+/* One studio surface: the same registration grid remains in view across scenes. */
+.experiment { --scene: var(--ink); --scene-text: var(--paper); position: relative; isolation: isolate; }
+.experiment:has([data-playground][data-colour="white"]) { --scene: var(--paper); --scene-text: var(--ink); }
+.studioGrid { position: fixed; inset: 0 var(--gutter); z-index: 8; pointer-events: none; color: #fff; mix-blend-mode: difference; opacity: .13; border-inline: 1px solid currentColor; background-image: linear-gradient(to right, #ffffff80 1px, transparent 1px), linear-gradient(to bottom, #ffffff50 1px, transparent 1px); background-size: 25% 100%, 100% 25svh; }
+.studioGrid span { position: absolute; font: 1.2rem var(--mono); }
+.studioGrid span:nth-child(1) { left: -.4rem; top: 7rem; }
+.studioGrid span:nth-child(2) { right: -.4rem; top: 7rem; }
+.studioGrid span:nth-child(3) { left: -.4rem; bottom: 3rem; }
+.studioGrid span:nth-child(4) { right: -.4rem; bottom: 3rem; }
+.collection { --paper-progress: 100%; position: relative; background: color-mix(in srgb, var(--scene), var(--paper) var(--paper-progress)); color: color-mix(in srgb, var(--scene-text), var(--ink) var(--paper-progress)); }
+.collectionIntro { background: transparent; color: inherit; padding-top: 3rem; padding-bottom: 0; }
+.collectionIntro h2 { font-size: clamp(3rem, 5vw, 6rem); }
+.collectionIntro h2 span { color: inherit; }
+.ratioSequence { background: transparent; }
+.ratioStage { min-height: 85svh; padding-top: 3rem; }
+.ratioPaper { display: none; }
+.ratioHeading, .ratioLabels, .ratioNote { color: inherit; mix-blend-mode: normal; }
+.ratioBlack, .ratioWhite { width: 65%; }
+.ratioWhite { margin-top: -8rem; }
+.faithStudy { min-height: 90svh; padding-top: 1rem; }
+.faithStudy h3 { margin-top: 4rem; }
+.faithObject { width: 25%; top: 22%; }
+.faithNote { left: var(--gutter); right: auto; bottom: 5rem; }
+.growthStudy { background: transparent; overflow: visible; min-height: 95svh; }
+.growthObject { top: -15%; width: 53%; right: -3%; }
+.growthStudy h3 { position: relative; z-index: 2; }
+.studyFinal { background: transparent; color: var(--ink); min-height: 90svh; }
+.studyFooter { color: var(--muted); }
+.story, .frame3 { background: var(--paper); }
+.technical { background: var(--ink); }
+.technicalTitle span, .technical .disclaimer, .technical .specifications dt { color: inherit; opacity: .7; }
+.lab { background: var(--ink); }
+@media (max-width: 899px) {
+  .ratioStage { min-height: auto; }
+  .ratioWhite { margin-top: 0; }
+  .faithStudy { min-height: 55rem; }
+  .growthStudy { min-height: 55rem; }
+  .growthObject { width: 75%; top: 3rem; right: -15%; }
+  .studyFinal { min-height: 60rem; }
+}
+@media (max-width: 599px) {
+  .collectionIntro { padding-top: 2rem; }
+  .ratioStage { padding-bottom: 1rem; }
+  .ratioBlack, .ratioWhite { width: 100%; }
+  .ratioWhite { margin-top: 3rem; }
+  .faithStudy { min-height: 43rem; }
+  .faithStudy h3 { margin-top: 2rem; }
+  .faithObject { width: 43%; top: 18rem; right: 7%; }
+  .faithNote { bottom: 3rem; }
+  .growthStudy { min-height: 45rem; }
+  .growthObject { width: 100%; top: 10rem; right: -20%; }
+  .studyFinal { min-height: 50rem; }
+  .studioGrid { background-size: 50% 100%, 100% 25svh; opacity: .1; }
+}
+/* Resolved scene boundaries: continuity comes from the grid, not collisions. */
+.experiment { --scene-space: clamp(4rem, 8vw, 8rem); --scene: #353a3d; --scene-text: var(--paper); }
+.experiment:has([data-playground][data-colour="white"]) { --scene: #353a3d; --scene-text: var(--paper); }
+.collectionIntro { padding: var(--scene-space) var(--gutter); }
+.faithStudy, .growthStudy, .studyFinal { overflow: clip; padding: var(--scene-space) var(--gutter); min-height: 100svh; }
+.faithStudy { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 5rem; align-items: center; }
+.faithStudy > .meta:first-child { grid-column: 1; align-self: start; }
+.faithStudy h3 { grid-column: 1; font-size: clamp(3rem, 6.5vw, 7rem); margin: 0; }
+.faithDetail { grid-column: 1; width: 6rem; height: 6rem; position: relative; margin-top: 1rem; border: 1px solid var(--line); }
+.faithDetail > div { position: absolute; inset: 0; overflow: hidden; }
+.faithDetail .garment { position: absolute; width: 21rem; top: -8rem; left: -7.5rem; }
+.faithDetail > span { position: absolute; left: 8rem; top: 2rem; width: 12rem; color: var(--muted); }
+.faithObject { position: relative; grid-column: 2; grid-row: 1 / 5; width: 80%; right: auto; top: auto; margin-inline: auto; }
+.faithObject:is(:hover, :focus-visible) .garment { transform: scale(1.025); }
+.faithNote { position: relative; grid-column: 1; left: auto; bottom: auto; right: auto; max-width: 25rem; }
+.growthStudy { display: grid; grid-template-columns: .7fr 1.3fr; align-items: center; gap: 2rem; min-height: 105svh; }
+.growthStudy > .meta { grid-column: 1; align-self: start; }
+.growthStudy h3 { grid-column: 1; font-size: clamp(3rem, 6vw, 6.5rem); line-height: 1; margin: 0; }
+.growthObject { position: relative; grid-column: 2; grid-row: 1 / 5; width: 105%; right: auto; top: auto; transform: none; align-self: center; }
+.growthStudy .textLink, .growthStudy .growthNote { position: relative; grid-column: 1; left: auto; right: auto; bottom: auto; }
+.growthStudy .growthNote { max-width: 22rem; }
+.studyFinal { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
+.studyFinal h3 { font-size: clamp(3.5rem,6vw,6.5rem); }
+.studyObject { position: relative; width: 95%; right: auto; top: auto; transform: rotate(-3deg); }
+.studyFooter { position: relative; grid-column: 1 / -1; left: auto; bottom: auto; }
+.canvasOptions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: center; }
+.canvasOptions figure { margin: 0; }
+.canvasOptions figure:nth-child(2) { padding-top: 5rem; }
+.canvasOptions figcaption { text-align: center; margin-top: 1.5rem; }
+.canvasTraveller { position: absolute; width: 58%; right: var(--gutter); top: 22%; }
+.staticCanvases { min-width: 0; }
+.story[data-motion] .staticCanvases { display: none; }
+.story[data-motion] .frame0 .frameCopy { max-width: 31%; top: 16%; }
+.story[data-motion] .frame0 h2 { font-size: 6vw; }
+.story[data-motion] .frame3 .frameCopy { left: var(--gutter); top: 18%; right: auto; max-width: 35%; }
+.story[data-motion] .frame3 h2 { font-size: 9vw; line-height: .98; }
+.storyStep { padding-block: var(--scene-space); }
+.lab { padding-top: var(--scene-space); overflow: clip; }
+.labComposition { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 3rem; margin-block: 4rem 6rem; }
+.lab h2 { font-size: clamp(3rem, 6vw, 6.5rem); }
+.lab h2 span:nth-child(2), .lab h2 span:nth-child(3) { margin: 0; }
+.lab h2 .labFront { mix-blend-mode: normal; }
+.labGarment { position: relative; width: 80%; right: auto; top: auto; margin-inline: auto; transform: rotate(3deg); }
+@media (max-width: 899px) {
+  .faithStudy, .growthStudy, .studyFinal { min-height: auto; gap: 2rem; }
+  .faithObject { width: 95%; }
+  .canvasOptions { gap: .5rem; }
+  .frame0 { grid-template-columns: 1fr; }
+  .staticCanvases { width: 100%; }
+  .frame3 h2 { font-size: 12vw; }
+}
+@media (max-width: 599px) {
+  .faithStudy, .growthStudy, .studyFinal { display: flex; flex-direction: column; align-items: stretch; gap: 2rem; }
+  .faithStudy h3 { font-size: 16vw; }
+  .faithObject { width: 75%; margin-block: 1rem; }
+  .faithNote { font-size: .6rem; max-width: none; }
+  .growthStudy h3 { font-size: 14vw; }
+  .growthObject { width: 100%; margin-block: 1rem; order: 0; }
+  .growthStudy .growthNote { font-size: .6rem; max-width: none; }
+  .studyFinal h3 { font-size: 14vw; }
+  .studyObject { width: 83%; margin-inline: auto; }
+  .studyFooter { font-size: .55rem; }
+  .canvasOptions { margin-block: 3rem; gap: .35rem; }
+  .canvasOptions figure:nth-child(2) { padding-top: 3rem; }
+  .canvasOptions figcaption { font-size: .6rem; }
+  .frame3 { text-align: left; }
+  .frame3 h2 { font-size: 20vw; }
+  .frame3 .staticGarment { width: 77%; }
+  .storyStep { padding-block: 4rem; }
+  .storyFootnote { text-align: left; }
+  .labComposition { display: flex; flex-direction: column; align-items: stretch; margin-bottom: 4rem; }
+  .lab h2 { font-size: 13vw; }
+  .labGarment { width: 72%; }
+}

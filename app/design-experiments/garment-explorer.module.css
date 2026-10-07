@@ -1,0 +1,32 @@
+.explorer { position: relative; overflow: clip; padding: var(--scene-space) var(--gutter); background: var(--ink); color: var(--paper); }
+.heading { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 1.5rem 5rem; }
+.heading > p:first-child { grid-column: 1 / -1; }
+.heading h2 { font: 600 clamp(4rem, 7vw, 7rem)/1 var(--display); letter-spacing: -.04em; }
+.heading > p:last-child { padding-bottom: .5rem; }
+.categories { display: flex; gap: 1.5rem; margin-block: 3rem 1rem; }
+.categories button { font: 600 clamp(1.5rem, 3vw, 2.5rem)/1 var(--display); padding: 1rem 1.5rem; display: flex; gap: 3rem; justify-content: space-between; border: 1px solid currentColor; cursor: pointer; }
+.categories button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+.categories button span { font: 1rem var(--mono); }
+.categories button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.inspection { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center; padding-block: 2rem; }
+.object { position: relative; width: min(100%, 33rem); margin-inline: auto; aspect-ratio: .78; }
+.render { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 200ms ease-out, visibility 200ms; }
+.render[data-active="true"] { opacity: 1; visibility: visible; }
+.registration { position: absolute; bottom: 0; right: 0; font: 1.5rem var(--mono); opacity: .5; }
+.information h3 { font: 600 clamp(2.5rem,4vw,4rem)/1.1 var(--display); margin-block: 1rem; }
+.information dl { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-block: 2rem; }
+.information dl > div { border-top: 1px solid var(--on-dark-muted); padding-top: .75rem; }
+.information dt { font: .6rem/1.6 var(--mono); opacity: .75; }
+.information dd { font: .85rem/1.6 var(--mono); margin-top: .5rem; }
+.note { font: .65rem/1.8 var(--mono); color: var(--on-dark-muted); max-width: 45rem; margin-top: 2rem; }
+@media (max-width: 899px) { .inspection { gap: 2rem; } .categories button { gap: 2rem; } }
+@media (max-width: 599px) {
+  .heading { display: block; }
+  .heading h2 { font-size: 16vw; margin-block: 1.5rem; }
+  .categories { gap: .5rem; margin-top: 2rem; }
+  .categories button { flex: 1; font-size: 1.3rem; padding: .85rem .65rem; gap: .5rem; }
+  .inspection { grid-template-columns: 1fr; gap: 2rem; }
+  .object { width: 83%; }
+  .information h3 { font-size: 2.8rem; }
+}
+@media (prefers-reduced-motion: reduce) { .render { transition: none; } }

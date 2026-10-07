@@ -1,0 +1,109 @@
+.poster { position: relative; min-height: 100svh; padding-inline: var(--gutter); overflow: clip; isolation: isolate; background: var(--ink); color: var(--paper); transition: color 280ms; }
+.inversePlane { position: absolute; inset: 0; background: var(--paper); opacity: 0; transition: opacity 280ms ease-out; z-index: -1; }
+.poster[data-colour="white"] .inversePlane { opacity: 1; }
+.poster[data-colour="white"] { color: var(--ink); }
+.posterHeader { position: relative; }
+.posterStage { position: relative; height: calc(100svh - 12rem); min-height: 36rem; }
+.posterTitle { position: absolute; top: 13%; left: 0; z-index: 1; font: 600 clamp(4rem, min(9.3vw, 14svh), 9rem)/.97 var(--display); letter-spacing: -.055em; pointer-events: none; }
+.posterTitle span { display: block; }
+.pointerObject { position: absolute; z-index: 2; width: min(64vw, 87svh); left: 67%; top: -12%; transform: translateX(-50%) perspective(1100px) rotateX(var(--pointer-x, 0deg)) rotateY(var(--pointer-y, 0deg)); transform-origin: 50% 45%; transition: transform 380ms cubic-bezier(.2,.65,.3,1); pointer-events: none; }
+.lookBlack, .lookWhite { transition: opacity 240ms ease-out, transform 300ms ease-out; transform: rotate(-5deg); }
+.lookWhite { position: absolute; inset: 0; opacity: 0; transform: rotate(-3deg) scale(.98); }
+.poster[data-colour="white"] .lookWhite { opacity: 1; transform: rotate(-3deg) scale(1); }
+.poster[data-colour="white"] .lookBlack { opacity: 0; transform: rotate(-5deg) scale(.98); }
+.posterEdition { position: absolute; left: 0; top: 0; }
+.posterCoordinates { position: absolute; left: 0; bottom: 9rem; }
+.printFrame { position: absolute; inset: 3% 0 0 45%; border: 1px solid currentColor; opacity: .2; pointer-events: none; transition: inset 280ms; }
+.poster[data-colour="white"] .printFrame { inset: 3% 3% 0 42%; }
+.printFrame span { position: absolute; font: 1rem var(--mono); }
+.printFrame span:nth-child(1) { top: -.65rem; left: -.35rem; }
+.printFrame span:nth-child(2) { top: -.65rem; right: -.35rem; }
+.printFrame span:nth-child(3) { bottom: -.65rem; left: -.35rem; }
+.printFrame span:nth-child(4) { bottom: -.65rem; right: -.35rem; }
+.selector { position: absolute; bottom: 1.5rem; left: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; z-index: 4; width: min(29rem, 42%); }
+.selector > span { grid-column: 1 / -1; }
+.selector button { display: flex; justify-content: space-between; align-items: center; background: var(--ink); color: var(--paper); border: 1px solid currentColor; padding: 1rem 1.25rem; font: 600 clamp(1.25rem, 2.5vw, 2.5rem)/1 var(--display); cursor: pointer; }
+.selector button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+.poster[data-colour="white"] .selector button { background: var(--paper); color: var(--ink); }
+.poster[data-colour="white"] .selector button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.selector button span { font: 1rem var(--mono); }
+.posterBottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.5rem; position: relative; z-index: 3; background: var(--scene); }
+.posterBottom a { padding-block: .75rem; text-underline-offset: .4em; }
+.posterBottom a:hover { text-decoration: underline; }
+.poster :is(button,a):focus-visible, .miniLab :is(button,input):focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.miniLab :is(button,input):focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.miniLab { position: relative; display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; gap: 2rem; padding-block: 5rem 2rem; margin-top: 4rem; border-top: 1px solid var(--on-dark-muted); }
+.labHeading h3 { font: 600 clamp(3rem,6vw,6rem)/1 var(--display); letter-spacing: -.03em; margin-block: 1.5rem; }
+.labHint, .touchHint, .areaLabel, .labControls { font: .65rem/1.7 var(--mono); }
+.touchHint { display: none; }
+.labObject { position: relative; width: 100%; }
+.printArea { position: absolute; left: 27%; top: 32%; width: 46%; height: 34%; border: 1px solid var(--on-dark-muted); background-image: linear-gradient(to right, #eeece51a 1px, transparent 1px), linear-gradient(to bottom, #eeece51a 1px, transparent 1px); background-size: 25% 25%; }
+.areaLabel { position: absolute; top: -1.75rem; left: 0; white-space: nowrap; color: var(--paper); }
+.sampleArtwork { position: absolute; width: 38%; aspect-ratio: 1; padding: 8%; display: flex; flex-direction: column; align-items: start; justify-content: space-between; background: var(--paper); color: var(--ink); cursor: grab; touch-action: pan-y; user-select: none; container-type: inline-size; }
+.sampleArtwork:active { cursor: grabbing; }
+.sampleArtwork span:first-child { font: 600 55cqw/1 var(--display); letter-spacing: -.05em; }
+.sampleArtwork span:nth-child(2) { font: 600 13cqw/1.1 var(--mono); text-align: left; }
+.sampleArtwork span:last-child { font: 6cqw/1.2 var(--mono); white-space: nowrap; }
+.labControls { min-width: 0; }
+.labControls > p:first-child { margin-bottom: 2rem; }
+.labControls label { display: flex; justify-content: space-between; margin-top: 1rem; }
+.labControls input { width: 100%; min-height: 2.75rem; accent-color: var(--paper); cursor: pointer; }
+.positionControls { display: flex; flex-wrap: wrap; margin-top: 1rem; }
+.positionControls > span { width: 100%; margin-bottom: .5rem; }
+.positionControls button { flex: 1; min-width: 2.75rem; min-height: 2.75rem; border: 1px solid var(--on-dark-muted); cursor: pointer; }
+.positionControls button:hover, .resetPrint:hover { color: var(--ink); background: var(--paper); }
+.placementReadout { margin-top: .75rem; color: var(--on-dark-muted); }
+.resetPrint { margin-block: 1rem; border-bottom: 1px solid currentColor; min-height: 2.75rem; cursor: pointer; }
+.controlNote, .labDisclaimer, .noScript { font: .7rem/1.7 var(--mono); color: var(--on-dark-muted); }
+.labDisclaimer { grid-column: 1 / -1; max-width: 45rem; }
+.noScript { padding: 1rem; }
+@media (max-width: 899px) {
+  .pointerObject { width: 73%; top: 3%; left: 68%; }
+  .posterTitle { font-size: 10vw; }
+
+  .miniLab { grid-template-columns: 1.6fr 1fr; }
+  .labHeading { grid-column: 1 / -1; }
+  .labHeading h3 br { display: none; }
+
+}
+@media (max-width: 599px) {
+  .posterStage { min-height: 31rem; height: calc(100svh - 13rem); }
+  .posterTitle { top: 5%; font-size: 14vw; z-index: 3; }
+
+
+  .pointerObject { width: 105%; top: 18%; left: 65%; }
+  .printFrame, .poster[data-colour="white"] .printFrame { inset: 20% 0 15% 25%; }
+  .posterCoordinates { display: none; }
+  .selector { left: 0; bottom: .5rem; width: 100%; gap: .5rem; }
+  .selector button { padding: 1rem; font-size: 1.7rem; }
+  .posterBottom { flex-wrap: wrap; }
+  .posterBottom p { display: none; }
+  .miniLab { grid-template-columns: 1fr; gap: 1rem; padding-top: 3rem; }
+  .labHeading h3 { font-size: 4rem; }
+  .labObject { width: 95%; margin-inline: auto; }
+  .labControls { max-width: none; }
+  .labControls > p:first-child { margin-bottom: 1rem; }
+  .labDisclaimer { margin-top: 1rem; }
+}
+@media (pointer: coarse) { .labHint { display: none; } .touchHint { display: block; } }
+@media (prefers-reduced-motion: reduce) { .poster *, .miniLab * { transition: none; } }
+
+.ratioPlayground { min-height: 0; padding: var(--scene-space) var(--gutter) 2rem; }
+.ratioPlayground .posterStage { height: min(75svh, 48rem); min-height: 38rem; }
+.ratioPlayground .posterTitle { font-size: clamp(3rem, 5.5vw, 6rem); top: 20%; }
+.ratioPlayground .pointerObject { width: min(43vw, 58svh); left: 72%; top: 0; }
+.ratioPlayground .posterCoordinates { bottom: 10rem; }
+.ratioPlayground .posterBottom { background: transparent; }
+.ratioPlayground .printFrame { inset: 2% 0 5% 45%; }
+.ratioPlayground[data-colour="white"] .printFrame { inset: 2% 3% 5% 42%; }
+.miniLab { padding-top: 4rem; margin-top: 0; }
+@media (max-width: 599px) {
+  .ratioPlayground .posterStage { height: auto; min-height: 49rem; }
+  .ratioPlayground .posterTitle { font-size: 13vw; top: 4rem; }
+  .ratioPlayground .pointerObject { width: 86%; left: 55%; top: 13rem; }
+  .ratioPlayground .selector { bottom: 0; }
+  .ratioPlayground .printFrame, .ratioPlayground[data-colour="white"] .printFrame { inset: 13rem 0 7rem 0; }
+  .ratioPlayground .posterBottom { padding-top: 2rem; }
+}
