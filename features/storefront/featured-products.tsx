@@ -6,6 +6,9 @@ import { priceLabel, type Product } from "@/data/products";
 import { garmentLabel } from "@/data/garments";
 import { ProductMedia, GarmentImage } from "./product-media";
 import styles from "./storefront.module.css";
+import { RegistrationFrame } from "./registration-frame";
+import { GarmentResponse } from "./garment-response";
+import { PrintReveal } from "./print-reveal";
 
 export function FeaturedProducts({ products }: { products: Product[] }) {
   const [view, setView] = useState({ index: 0, previous: null as number | null, direction: 1, revision: 0 });
@@ -19,12 +22,15 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
     <div className={styles.sectionHeading}><div><p className={styles.micro}>02 / THE DEPARTMENT COLLECTION</p><h2 id="featured-title">SHOP WHAT<br />WE MADE.</h2></div><Link className={styles.action} href="/catalogue">VIEW FULL CATALOGUE <span>↗</span></Link></div>
     <div className={styles.featureStage}>
       <div className={styles.featureArt} data-direction={view.direction > 0 ? "next" : "previous"}>
+        <RegistrationFrame label="COLLECTION / OBJECT STUDY" />
         <span className={styles.edition} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
         <div className={styles.productHandoff}>
           {view.previous !== null && <div key={`out-${view.revision}`} className={styles.departingPiece} aria-hidden="true" onAnimationEnd={event => {
             if (event.target === event.currentTarget) setView(current => current.revision === view.revision ? { ...current, previous: null } : current);
           }}><GarmentImage image={products[view.previous].media.cover} /></div>}
-          <div key={product.slug} className={styles.arrivingPiece}><ProductMedia media={product.media} /></div>
+          <PrintReveal focus={products[0].media.artworkFocus} active={view.revision === 0 && !product.media.video}>
+            <div key={product.slug} className={styles.arrivingPiece}>{product.media.video ? <ProductMedia media={product.media} /> : <GarmentResponse><ProductMedia media={product.media} /></GarmentResponse>}</div>
+          </PrintReveal>
         </div>
         <p className={styles.micro}>{product.tagline}</p>
       </div>

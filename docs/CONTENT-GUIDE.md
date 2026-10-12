@@ -11,6 +11,9 @@ The catalogue is `/catalogue`, custom printing is `/custom`, and each piece has 
 | Product names, descriptions, prices, options and featured status | `data/products.ts` |
 | Image paths, dimensions and alternative text | `data/media.ts` |
 | Garment types and custom-preview imagery | `data/garments.ts` |
+| Design genre IDs and customer labels | `data/genres.ts` |
+| Shared colour, spacing, typography and motion tokens | `features/storefront/storefront.module.css` |
+| Archive layout, filters and product plates | `features/storefront/catalogue.module.css` |
 | Hero headline/media, business description and contact channel | `data/site.ts` |
 
 These files are the content source. You do not need to edit a React component to add a product, change its price or replace its media. Keep quotes, commas and brackets intact. Run `npm run lint` and `npm run typecheck` after editing, then inspect the affected pages.
@@ -20,11 +23,21 @@ These files are the content source. You do not need to edit a React component to
 1. Put its approved images in `public/products/your-product-name/`. Lowercase names with hyphens are easiest to maintain.
 2. Add an image entry to the `media` list in `data/media.ts`, using the real image dimensions and a useful description. For example, describe the colour, garment and artwork shown. The public URL starts with `/products/`, not `/public/products/`.
 3. Copy one object in the `products` array in `data/products.ts`. Give it a **unique** `slug`, using lowercase letters and hyphens. This becomes its web address. Avoid changing an established slug after launch without arranging a redirect.
-4. Update its name, tagline, garment type, collection, description and media. Use a garment ID from `data/garments.ts`.
+4. Update its name, tagline, garment type, genres, collection, description and media. Use a garment ID from `data/garments.ts` and genre IDs from `data/genres.ts`, for example `garmentType: "hoodie", genres: ["faith", "minimal"]`.
 5. Leave unconfirmed commercial information unconfirmed: `price: null`, `available: null`, `colours: []`, `sizes: []`.
 6. Set `featured` to `true` or `false`. Save and inspect `/catalogue` and `/product/your-slug`.
 
 New product pages and catalogue entries are generated from the data; no separate page file is required. Array order controls catalogue order and the order of featured pieces. Aim for three to five featured pieces.
+
+## Assign design genres and filter the archive
+
+Each product has a `genres` array. Choose one or more stable IDs from `data/genres.ts`. These describe the artwork's subject or visual language, independently of its garment type. To add a genre, add its ID and customer-facing label to that registry, then assign it to an actual product. Do not change established IDs casually: they are used in shared catalogue URLs.
+
+Initial editorial assignments are Growth → mindset/graphic (botanical growth and its statement); Discipline → gym/mindset (weight-training illustration); Faith → faith/minimal (restrained linework and statement); Ratio → graphic/minimal (geometric linework); Study → graphic/typography (letterforms). These are editable design classifications, not commercial specifications.
+
+Filters are generated only from genres and garment types represented anywhere in the product data. Both dimensions combine: `/catalogue?genre=faith&type=hoodie`. Changing or clearing one retains the other. A valid combination with no matching products shows a recovery message and an all-pieces link. Unknown or repeated query parameters fall back to All for that dimension. Native links support sharing, browser history and browsing without JavaScript.
+
+Archive references come from the product's position in the central array, so filtering does not renumber products. Reordering the source array does change those display references; slugs remain the durable product identifiers.
 
 ## Change a price
 
@@ -59,6 +72,8 @@ media: {
 ```
 
 Only `cover` is required. The product page avoids showing the same image twice. Catalogue hover/focus can show the first detail image or a distinct front view. Touch visitors can open the product page to see additional images.
+
+The archive chooses the first distinct image in back, front, then detail order. Single-image products retain their cover and a subtle hover treatment. Do not invent a reverse view to fill the alternate slot.
 
 Existing transparent renders have large empty margins. The `garment` framing compensates for that. For a photograph or complete scene, set `framing: "scene"` on its image entry. Inspect the crop after replacing an image, especially when the new image has different transparent margins.
 
@@ -136,6 +151,28 @@ public/hero/department-campaign.webm
 - Reuse existing paths; do not duplicate large videos just to give each page a separate folder.
 
 The existing `/public/garments/` assets are intentionally untouched for V2 compatibility. V3 adds one small front-facing tee still extracted from the supplied video, rather than inventing a blank garment image.
+
+## Adjust the visual system
+
+### V3.2 interactive moments
+
+The hero's `MotionFilm` uses `interactive` to let desktop pointer movement seek the existing turntable footage. Left/right buttons provide keyboard and touch control and pause on the selected view; Play resumes the film. Pointer movement eases towards a frame and settles after 700ms. This is filmed rotation, not a live 3D model, and the source actually depicts a tee. Remove `interactive` in `hero-campaign.tsx` to retain the original passive film and pause control. `HeroHeadline` supplies the short print-registration effect on hover, focus or activation, without changing headline text.
+
+The first featured product can opt into the artwork-to-garment scroll reveal with a focal point on its media:
+
+```ts
+artworkFocus: { x: 65, y: 43, scale: 3.2 }
+```
+
+These are percentages within the displayed cover, not the original PNG canvas. They currently frame Growth's botanical artwork. Adjust against the actual render when replacing that cover; omit the field for a normal product presentation. `PrintReveal` uses the same image throughout and adds no pin or extra scroll height. Selecting another featured product immediately removes the scroll transformation. The static/no-JavaScript/reduced-motion fallback shows the whole garment.
+
+Catalogue alternate images now reveal through a mask on hover or keyboard focus. Existing `GarmentResponse` supplies a small settling tilt. The product page has a matching short masked entrance; navigation is not intercepted and no shared-element router is installed. Touch users see all supplied additional images on the product page.
+
+The custom sample retains drag, keyboard movement, scale, rotation and reset, with four tap-to-position controls adapted from V2. A dashed sample area explains its bounds. Only the tee image is blank; the other supplied garments remain labelled finished studies. This remains an interaction preview, not a production proof.
+
+Shared tokens at the top of `features/storefront/storefront.module.css` control paper/ink/olive colours, gutters, scene spacing, fonts and motion easing. `RegistrationFrame` supplies crop marks around media; `StoreMotion` owns the restrained registration-grid scroll and route reveal. `GarmentResponse` adapts V2's desktop pointer movement and idle settle, with touch and reduced-motion fallbacks. The hero's CSS entrance resolves within 750ms, without a splash screen or navigation delay. Archive composition and mobile filter layout are isolated in `catalogue.module.css`.
+
+Inspect `/storefront-v3`, `/catalogue`, `/custom` and a product page after changing shared settings. Test a narrow viewport and reduced motion as well as desktop. Run `node --test tests/*.test.mjs` with Node 24 for filter and print-placement checks.
 
 ## Before going live
 

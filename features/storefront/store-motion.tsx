@@ -43,7 +43,7 @@ export function StoreMotion({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   return <div ref={root} className={styles.motionWorld}>
-    <div className={styles.studioGrid} data-studio-grid aria-hidden="true"><span>+</span><span>+</span><span>+</span><span>+</span></div>
+    <div className={styles.studioGrid} data-studio-grid aria-hidden="true"><span>+</span><span>+</span><span>+</span><span>+</span><i className={styles.gridAxis} /><i className={styles.gridCross} /><small className={styles.gridCoordinate}>D/P — ALIGN / EXPLORE</small></div>
     <div className={styles.routeRule} data-route-rule aria-hidden="true" />
     {children}
   </div>;

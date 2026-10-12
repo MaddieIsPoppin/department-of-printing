@@ -1,4 +1,5 @@
 .store {
+  --ease-settle: cubic-bezier(.2,.65,.3,1); --motion-quick: 180ms; --motion-enter: 420ms;
   --paper: #eeece5; --ink: #252622; --film: #353a3d; --muted: #65665e; --line: #c9c9bd; --olive: #d3d5c5;
   --gutter: clamp(1.25rem, 4.5vw, 5rem); --space: clamp(4rem, 7vw, 7rem);
   --display: var(--store-display), Impact, sans-serif; --mono: var(--font-geist-mono), monospace; --body: var(--font-geist-sans), sans-serif;
@@ -21,7 +22,7 @@
 .header { padding: 1.75rem var(--gutter); min-height: 7rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; background: var(--film); color: var(--paper); }
 .brand { font: 600 1.3rem/1 var(--display); letter-spacing: -.035em; }
 .header nav { display: flex; align-items: center; gap: 2rem; font: .65rem/1.5 var(--mono); }
-.header nav a { padding-block: .75rem; }
+.header nav a { padding-block: .75rem; min-height: 44px; display: inline-flex; align-items: center; }
 .header nav a:hover { text-decoration: underline; text-underline-offset: .4em; }
 .cart { opacity: .65; }
 .cart small { display: block; font-size: .5rem; text-align: right; }
@@ -33,13 +34,30 @@
 .hero::after { content: "+"; position: absolute; top: 8%; right: var(--gutter); font: 1.25rem var(--mono); opacity: .5; pointer-events: none; }
 .film { position: relative; overflow: hidden; }
 .film video { display: block; width: 100%; height: 100%; object-fit: cover; }
-.filmControl { position: absolute; right: 1rem; bottom: 1rem; z-index: 3; padding: .75rem; color: var(--paper); background: #252622c9; font: .6rem/1.5 var(--mono); }
+.filmControl { position: absolute; right: 1rem; bottom: 1rem; z-index: 3; min-height: 44px; padding: .75rem; color: var(--paper); background: #252622c9; font: .6rem/1.5 var(--mono); }
 .heroFilm { position: absolute; inset: 0; z-index: -1; }
 .heroFilm video { position: absolute; width: 105%; height: 105%; top: -7%; left: 19%; max-width: none; }
 .heroFilm .filmControl { bottom: 7rem; right: var(--gutter); }
+.filmTurn { position: absolute; right: var(--gutter); bottom: 10.5rem; display: flex; align-items: center; gap: .5rem; color: var(--paper); font: .55rem/1.5 var(--mono); }
+.filmTurn button { width: 44px; height: 44px; border: 1px solid #eeece550; background: var(--film); font-size: 1.25rem; }
+.filmTurn button:hover { background: var(--paper); color: var(--ink); }
+.filmTurn span { margin-right: .5rem; }
+.printHeadline { display: block; font: inherit; letter-spacing: inherit; text-align: left; color: inherit; }
+.inkLine { position: relative; }
+.inkLine i { position: absolute; inset: 0; font: inherit; color: var(--olive); opacity: 0; pointer-events: none; }
+.printReveal { position: relative; overflow: clip; aspect-ratio: .78; }
+.printReveal > div { transform-origin: center; }
+.printRevealLabel { position: absolute; left: 10%; bottom: 21%; font: .55rem/1.5 var(--mono); background: var(--paper); padding: .5rem; pointer-events: none; opacity: 0; }
+.printReveal[data-revealing="true"] .garmentResponse { pointer-events: none; }
 .heroCopy { position: relative; padding: 5svh var(--gutter); width: 52%; }
 .heroCopy h1 { font-size: clamp(3.8rem, min(7.3vw, 11svh), 8rem); line-height: 1; margin-block: 2.5rem 2rem; }
 .heroCopy h1 span { display: block; white-space: nowrap; }
+.heroCopy > .micro { animation: identifier-in 220ms var(--ease-settle) both; }
+.heroCopy h1 span { animation: type-in 350ms 80ms var(--ease-settle) both; }
+.heroFilm { animation: film-in 400ms 350ms var(--ease-settle) both; }
+@keyframes identifier-in { from { opacity: .35; transform: translateX(-6px); } }
+@keyframes type-in { from { clip-path: inset(0 0 100% 0); transform: translateY(10px); } to { clip-path: inset(0); transform: none; } }
+@keyframes film-in { from { opacity: .55; transform: scale(1.025); } to { opacity: 1; transform: none; } }
 .heroCopy .body { max-width: 17rem; }
 .heroPaths { position: absolute; bottom: 0; left: var(--gutter); right: var(--gutter); display: flex; gap: 3rem; align-items: center; padding-block: 1.5rem 2rem; }
 .heroPaths .micro { margin-left: auto; }
@@ -98,6 +116,41 @@
 .studioGrid span:nth-child(2) { top: 28%; right: -.35rem; }
 .studioGrid span:nth-child(3) { bottom: 28%; left: -.35rem; }
 .studioGrid span:nth-child(4) { bottom: 28%; right: -.35rem; }
+.gridAxis { position: absolute; inset: 0 0 0 52%; border-left: 1px solid #ffffff80; }
+.gridCross { position: absolute; inset: 28% 0; border-block: 1px solid #ffffff70; }
+.gridCoordinate { position: absolute; bottom: 3rem; left: .5rem; font: .55rem var(--mono); writing-mode: vertical-rl; }
+.registrationFrame { position: absolute; inset: 1.25rem; pointer-events: none; z-index: 2; color: currentColor; }
+.registrationFrame i { position: absolute; width: 1rem; height: 1rem; border-color: currentColor; opacity: .4; }
+.registrationFrame i:nth-child(1) { inset: 0 auto auto 0; border-left: 1px solid; border-top: 1px solid; }
+.registrationFrame i:nth-child(2) { inset: 0 0 auto auto; border-right: 1px solid; border-top: 1px solid; }
+.registrationFrame i:nth-child(3) { inset: auto auto 0 0; border-left: 1px solid; border-bottom: 1px solid; }
+.registrationFrame i:nth-child(4) { inset: auto 0 0 auto; border-right: 1px solid; border-bottom: 1px solid; }
+.registrationFrame > span, .registrationFrame > small { position: absolute; font: .55rem/1.5 var(--mono); letter-spacing: .05em; }
+.registrationFrame > span { left: 1.75rem; top: -.2rem; }
+.registrationFrame > small { right: 1.75rem; bottom: -.2rem; }
+.hero > .registrationFrame { inset: 1.5rem var(--gutter) 7rem 54%; opacity: .65; }
+.hero .registrationFrame > span { top: 1rem; left: 1rem; }
+.hero .registrationFrame > small { display: none; }
+.featureArt > .registrationFrame { inset: 0 0 3rem; }
+.featureArt { padding-top: 3rem; }
+.garmentResponse { transform: perspective(1000px) rotateX(var(--turn-x, 0deg)) rotateY(var(--turn-y, 0deg)); transition: transform 240ms var(--ease-settle); }
+.creationObject > .registrationFrame { color: var(--paper); inset: 5rem 1rem 6.5rem; }
+.creationObject .registrationFrame > span { display: none; }
+.detailMedia { position: relative; }
+.detailMedia > .garmentResponse { animation: piece-resolve 420ms var(--ease-settle) both; }
+@keyframes piece-resolve { from { clip-path: inset(12% 8%); opacity: .65; } to { clip-path: inset(0); opacity: 1; } }
+.printField:has(.samplePrint) { outline: 1px dashed #eeece580; outline-offset: 4px; }
+.creationObject:has([data-framing="garment"]) .printField:has(.samplePrint) { outline-color: #25262250; }
+.placementButtons { display: flex; gap: .5rem; align-items: center; flex-basis: 100%; }
+.placementButtons > span { margin-right: auto; }
+.placementButtons button { width: 44px; border: 1px solid var(--line); text-decoration: none; font-size: 1rem; }
+.detailMedia > .registrationFrame { inset: 1rem; }
+.genreLinks { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.genreLinks a { min-height: 44px; display: inline-flex; align-items: center; padding-inline: .75rem; border: 1px solid var(--line); font: .6rem var(--mono); text-transform: uppercase; }
+.genreLinks a:hover { background: var(--ink); color: var(--paper); }
+.featured::after, .customTeaser::after, .finale::after { content: ""; position: absolute; top: 0; left: var(--gutter); right: var(--gutter); height: 1px; background: currentColor; opacity: .22; }
+.finale { position: relative; }
+.featureArt:has(.garmentResponse:hover) .registrationFrame i { opacity: .75; }
 .routeRule { position: fixed; inset: 0 0 auto; height: 2px; background: white; mix-blend-mode: difference; z-index: 20; pointer-events: none; }
 .motionWorld main > section h2 { position: relative; }
 .motionWorld main > section h2::before { content: ""; position: absolute; top: -.6rem; left: 0; width: 3rem; height: 1px; background: currentColor; opacity: .35; transform: scaleX(var(--rule-scale, 1)); transform-origin: left; }
@@ -197,7 +250,15 @@
   .heroCopy .body { font-size: .8rem; max-width: 15rem; }
   .heroFilm { top: 11rem; bottom: 6.5rem; }
   .heroFilm video { width: 170%; left: -30%; height: 100%; top: 0; }
+  .hero > .registrationFrame { inset: 16rem var(--gutter) 8rem; }
+  .hero .registrationFrame > span { display: none; }
+  .gridAxis { display: none; }
+  .gridCoordinate { display: none; }
+  .studioGrid { opacity: .08; }
+  .featureArt > .registrationFrame { inset: 0 0 2rem; }
+  .featureArt > .registrationFrame > span { display: none; }
   .heroFilm .filmControl { bottom: .5rem; right: .6rem; font-size: .5rem; }
+  .heroFilm .filmTurn { bottom: 3.75rem; right: .6rem; }
   .heroPaths { flex-wrap: wrap; gap: 1rem 1.5rem; padding-bottom: 1.5rem; }
   .heroPaths .action { font-size: .6rem; gap: 1rem; }
   .heroPaths .micro { display: none; }
@@ -244,5 +305,6 @@
   .store *, .store *::before, .store *::after { animation: none !important; transition: none !important; }
   .filmControl { display: none; }
   .departingPiece { display: none; }
+  .printRevealLabel { display: none; }
   .catalogueImage:hover .garmentImage, .action:hover span { transform: none; }
 }

@@ -6,6 +6,7 @@ import { garments } from "@/data/garments";
 import { GarmentImage } from "./product-media";
 import { constrainPlacement, initialPlacement, type Placement } from "./print-placement";
 import styles from "./storefront.module.css";
+import { RegistrationFrame } from "./registration-frame";
 
 export function CustomTeaser({ showHeading = true }: { showHeading?: boolean }) {
   const [selected, setSelected] = useState(0);
@@ -48,6 +49,7 @@ export function CustomTeaser({ showHeading = true }: { showHeading?: boolean }) 
     <div className={styles.teaserStage}>
       <div className={styles.creationPreview}>
        <div className={styles.creationObject}>
+        <RegistrationFrame label="YOUR PRINT / YOUR POINT OF VIEW" />
         <GarmentImage image={garment.image} />
         <div className={styles.garmentTabs} role="group" aria-label="Choose your garment">{garments.map((option, index) => <button type="button" key={option.id} aria-pressed={selected === index} onClick={() => { setSelected(index); setPosition(initialPlacement); }}>{option.label}</button>)}</div>
         <div className={styles.printField} ref={field}>
@@ -60,12 +62,16 @@ export function CustomTeaser({ showHeading = true }: { showHeading?: boolean }) 
          <label>SIZE <output>{position.scale}%</output><input type="range" min="60" max="150" step="5" value={position.scale} onChange={event => update({ scale: Number(event.target.value) })} /></label>
          <label>ROTATION <output>{position.angle}°</output><input type="range" min="-45" max="45" step="5" value={position.angle} onChange={event => update({ angle: Number(event.target.value) })} /></label>
          <button type="button" onClick={() => { drag.current = null; setPosition(initialPlacement); }}>RESET</button>
+         <div className={styles.placementButtons} role="group" aria-label="Position sample artwork"><span>POSITION</span>{([
+           ["←", "Move artwork left", -5, 0], ["↑", "Move artwork up", 0, -5], ["↓", "Move artwork down", 0, 5], ["→", "Move artwork right", 5, 0],
+         ] as const).map(([symbol, label, x, y]) => <button key={label} type="button" aria-label={label} onClick={() => update({ x: position.x + x, y: position.y + y })}>{symbol}</button>)}</div>
        </div>}
       </div>
       <div className={styles.creationInfo}>
         <p className={styles.micro}>THE SHAPE IS JUST THE START.</p>
         <h3>{printed ? "NOW IT’S\nYOUR IDEA." : "A LITTLE\nPOSSIBILITY."}</h3>
         <p className={styles.body}>{garment.description}</p>
+        <p className={styles.help}>Interactive preview, not a production proof. The tee is blank; hoodie and sweatshirt views are finished studies.</p>
         <p className={styles.help} id="print-help">{printed ? "Drag the sample, or select it and use your keyboard arrows. Just a little play — nothing is saved." : "Tap to try our sample artwork. No upload. No design experience needed."}</p>
         <Link className={styles.action} href="/custom#start">START A CUSTOM ORDER <span>↗</span></Link>
         <noscript><p className={styles.help}>The sample needs JavaScript. You can still explore our custom printing service.</p></noscript>

@@ -1,4 +1,5 @@
 import type { GarmentType } from "./garments";
+import type { ProductGenre } from "./genres";
 import { media, type ProductMedia } from "./media";
 
 export type Product = {
@@ -6,6 +7,7 @@ export type Product = {
   name: string;
   tagline: string;
   garmentType: GarmentType;
+  genres: ProductGenre[];
   collection: string;
   price: number | null; // Major currency units, e.g. rand. Null means unverified.
   currency: string;
@@ -20,30 +22,35 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "growth-is-a-process", name: "Growth Is A Process", tagline: "Give your idea room.", garmentType: "hoodie", collection: "Department Studies",
+    genres: ["mindset", "graphic"],
     price: null, currency: "ZAR", featured: true, available: null, colours: [], sizes: [],
-    media: { cover: media.growth, back: media.growth },
+    media: { cover: media.growth, back: media.growth, artworkFocus: { x: 65, y: 43, scale: 3.2 } },
     description: "Botanical lines spread across the back of a white hoodie. A study in taking up space, one mark at a time.",
   },
   {
     slug: "built-by-discipline", name: "Built By Discipline", tagline: "A mark made with intent.", garmentType: "tee", collection: "Department Studies",
+    genres: ["gym", "mindset"],
     price: null, currency: "ZAR", featured: true, available: null, colours: [], sizes: [],
     media: { cover: media.discipline, back: media.discipline },
     description: "An illustrated back print on a white tee. Figurative linework and a simple statement: built by discipline.",
   },
   {
     slug: "faith-as-a-mustard-seed", name: "Faith As A Mustard Seed", tagline: "A little goes a long way.", garmentType: "hoodie", collection: "Department Studies",
+    genres: ["faith", "minimal"],
     price: null, currency: "ZAR", featured: true, available: null, colours: [], sizes: [],
     media: { cover: media.faith, back: media.faith },
     description: "Fine blue linework, a small accent and a quiet statement on a white hoodie. A reminder that small beginnings matter.",
   },
   {
     slug: "ratio", name: "Ratio", tagline: "Order. Expression. Repeat.", garmentType: "hoodie", collection: "Department Studies",
+    genres: ["graphic", "minimal"],
     price: null, currency: "ZAR", featured: true, available: null, colours: [], sizes: [],
     media: { cover: media.ratioBlack, front: media.ratioBlack, details: [media.ratioWhite] },
     description: "Geometric Department of Printing artwork gives this hoodie its point of view. The supplied studies show a black front and a white back; these are different colour views, not a confirmed option range.",
   },
   {
     slug: "study", name: "Study", tagline: "Every mark starts somewhere.", garmentType: "sweat", collection: "Department Studies",
+    genres: ["graphic", "typography"],
     price: null, currency: "ZAR", featured: false, available: null, colours: [], sizes: [],
     media: { cover: media.study, back: media.study },
     description: "Multicoloured typographic forms across the back of a white sweatshirt. An exploration of letters as artwork.",

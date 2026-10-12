@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { productBySlug, priceLabel, availabilityLabel } from "@/data/products";
 import { garmentLabel } from "@/data/garments";
+import { genreLabel } from "@/data/genres";
+import { RegistrationFrame } from "@/features/storefront/registration-frame";
+import { GarmentResponse } from "@/features/storefront/garment-response";
 import { ProductMedia, GarmentImage } from "@/features/storefront/product-media";
 import { ContactAction } from "@/features/storefront/contact-action";
 import styles from "@/features/storefront/storefront.module.css";
@@ -21,8 +24,9 @@ export default async function ProductPage({ params }: Props) {
   return <main id="content" className={styles.productPage}>
     <Link href="/catalogue" className={styles.backLink}>← BACK TO THE CATALOGUE</Link>
     <div className={styles.productDetail}>
-      <div className={styles.detailMedia}><ProductMedia media={product.media} eager /></div>
+      <div className={styles.detailMedia}><RegistrationFrame label="DEPARTMENT / GARMENT STUDY" />{product.media.video ? <ProductMedia media={product.media} eager /> : <GarmentResponse><ProductMedia media={product.media} eager /></GarmentResponse>}</div>
       <div className={styles.detailInfo}><p className={styles.micro}>{product.collection} / {garmentLabel(product.garmentType)}</p><h1>{product.name}</h1><p className={styles.price}>{priceLabel(product)}</p><p className={styles.availability}>{availabilityLabel(product.available)}</p><p className={styles.body}>{product.description}</p>
+        <nav className={styles.genreLinks} aria-label="Explore related design genres">{product.genres.map(genre => <Link key={genre} href={`/catalogue?genre=${genre}`}>{genreLabel(genre)}</Link>)}</nav>
         <dl className={styles.productOptions}><div><dt>COLOURS</dt><dd>{product.colours.length ? product.colours.join(" / ") : "Range to be confirmed"}</dd></div><div><dt>SIZES</dt><dd>{product.sizes.length ? product.sizes.join(" / ") : "Sizing to be confirmed"}</dd></div></dl>
         {product.available !== false ? <ContactAction label="ASK ABOUT THIS PIECE" /> : <p className={styles.help}>This piece is currently unavailable.</p>}
         <Link className={styles.action} href="/custom">MAKE SOMETHING OF YOUR OWN <span>↗</span></Link>

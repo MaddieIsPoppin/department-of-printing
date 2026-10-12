@@ -14,6 +14,7 @@ export type ProductMedia = {
   details?: ImageAsset[];
   video?: VideoAsset;
   model?: string; // Reserved for a future renderer; never required by the shop.
+  artworkFocus?: { x: number; y: number; scale: number }; // Percent focal point in the framed cover.
 };
 
 // Existing V2 files stay in place. New media can use /products/[slug]/.
