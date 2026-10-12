@@ -6,7 +6,7 @@ import type { ImageAsset } from "@/data/media";
 import { garmentLabel } from "@/data/garments";
 import { genreLabel } from "@/data/genres";
 import { ProductGallery } from "@/features/experience-lab/product-gallery";
-import { CatalogueGrid } from "@/features/storefront/catalogue-grid";
+import { EditorialArchive } from "@/features/experience-lab/editorial-archive";
 import { ContactAction } from "@/features/storefront/contact-action";
 import styles from "@/features/experience-lab/lab.module.css";
 
@@ -23,6 +23,6 @@ export default async function LabProduct({ params }: Props) {
       <dl className={styles.specs}><div><dt>COLOURS</dt><dd>{product.colours.length ? product.colours.join(" / ") : "Range to be confirmed"}</dd></div><div><dt>SIZES</dt><dd>{product.sizes.length ? product.sizes.join(" / ") : "Sizing to be confirmed"}</dd></div></dl>
       {product.available !== false ? <ContactAction label="ASK ABOUT THIS PIECE" /> : <p>This piece is currently unavailable.</p>}<Link className={styles.textLink} href="/experience-lab/custom">MAKE SOMETHING OF YOUR OWN <span>↗</span></Link><p className={styles.meta}>DESIGN RENDER / FINAL SPECIFICATIONS CONFIRMED BEFORE PURCHASE</p>
     </div></div>
-    {!!related.length && <section className={styles.related} aria-labelledby="related-title"><p className={styles.meta}>KEEP EXPLORING / RELATED IDEAS</p><h2 id="related-title">ANOTHER POINT OF VIEW.</h2><CatalogueGrid products={related} basePath="/experience-lab" /></section>}
+    {!!related.length && <section className={styles.related} aria-labelledby="related-title"><p className={styles.meta}>KEEP EXPLORING / RELATED IDEAS</p><h2 id="related-title">ANOTHER POINT OF VIEW.</h2><EditorialArchive products={related} /></section>}
   </main>;
 }

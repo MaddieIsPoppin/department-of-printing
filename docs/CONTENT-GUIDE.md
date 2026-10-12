@@ -6,6 +6,16 @@ The catalogue is `/catalogue`, custom printing is `/custom`, and each piece has 
 
 ## Where to edit
 
+### V4.1 preview and shared presentation
+
+Run `npm.cmd run dev`, then open `/experience-lab/catalogue-preview` to enable the 40-item demo archive. Open `/experience-lab/catalogue` to return to real products. There is no global toggle and `/catalogue` always keeps its original real dataset. Preview entries have explicit demo labels and link to their underlying real piece; prices, availability, sizes and colours remain unconfirmed.
+
+To remove demo mode, delete `app/experience-lab/catalogue-preview/page.tsx`, `data/demo-products.ts` and `tests/demo-products.test.mjs`; remove the optional demo type and preview notice handling from the two archive components. No real records need changing. Preview routes are unavailable in production.
+
+Shared V4 navigation lives in `features/experience-lab/navigation.ts`. V4 tokens (`--gutter`, `--section-space`, `--type-section`, colours and easing) live in `features/experience-lab/lab.module.css`; archive columns and image framing live in `archive.module.css`. `hero.tsx`, `collection-stage.tsx` and `product-gallery.tsx` control major compositions. `features/storefront/print-reveal.tsx`, `garment-response.tsx` and `custom-teaser.tsx` supply the existing creative interactions.
+
+To change a product's garment type, update `garmentType` in `data/products.ts` to a registered ID from `data/garments.ts` and use matching imagery. A hoodie photograph must not be relabelled as a tee. The product/image/genre instructions below apply to both V4 and the historical real catalogue; demo studies regenerate from those records.
+
 V4 is a separate development preview at `/experience-lab`, with its own `/experience-lab/catalogue`, `/experience-lab/custom` and `/experience-lab/product/its-slug` routes. It uses the same content data below. See [the V4 handoff](DESIGN-EXPERIENCE-V4.md) for interactions and validation; its visual styles live in `features/experience-lab/lab.module.css`.
 
 | What you want to change | File |

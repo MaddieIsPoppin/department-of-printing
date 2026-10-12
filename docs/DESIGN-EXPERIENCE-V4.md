@@ -1,5 +1,13 @@
 # V4: Experience Lab
 
+## V4.1 refinement
+
+Completed V4 is recoverable at `a5ee09f` on `design/v4-experience-lab`. V4.1 adds bounded responsive stages, smaller secondary display type, an intentional tablet stack and a separate 40-item development archive at `/experience-lab/catalogue-preview`. Both real and demo V4 catalogues use the editorial masonry component; the real dataset and historical routes are unchanged.
+
+The archive uses one to five CSS columns, with two compact columns on standard phones. Reading and keyboard order run down each column. Fixed-ratio image plates prevent image-loading shifts, vary deterministically, and keep product information visible. No masonry measuring script, per-card scroll effect or catalogue video is used. The supplied attachment contained no Pinterest screenshot; the written density/proportion direction guided the implementation.
+
+V4.1 checks: lint, typecheck, six Node tests and production build passed. Chromium emulation covered landing, catalogue, demo archive, Ratio detail and custom printing at 1920×1080, 1440×900, 1366×768, 1024×768, 768×1024, 390×844 and 360×800. Checked overflow, loaded media, combined filters (eight faith/hoodie demo matches), empty-state recovery, source-product links, back navigation and reduced motion. No captured runtime errors. Physical devices, other browser engines and formal performance profiling remain outside these checks.
+
 ## Review and preservation
 
 Branch: `design/v4-experience-lab`. The branch was clean and already existed when this iteration began. V3.2 checkpoint: `0c3a2535f530300d21c9318871f3ff2a4ec376d9`, annotated tag `checkpoint/v3.2-before-v4`, pushed to origin. V4 implementation is left in the working tree for review; it has not been merged or deployed.

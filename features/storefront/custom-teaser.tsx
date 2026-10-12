@@ -46,8 +46,8 @@ export function CustomTeaser({ showHeading = true, customHref = "/custom#start" 
 
   return <section className={styles.customTeaser} id="your-idea" aria-label="Try an idea on a garment">
     {showHeading && <div className={styles.sectionHeading}><div><p className={styles.micro}>03 / YOUR POINT OF VIEW</p><h2>OR MAKE SOMETHING<br />WE HAVEN’T.</h2></div><p className={styles.body}>You’re not limited to our designs.<br />Start with a shape. Bring your idea.</p></div>}
-    <div className={styles.teaserStage}>
-      <div className={styles.creationPreview}>
+    <div className={styles.teaserStage} data-teaser-stage>
+      <div className={styles.creationPreview} data-creation-preview>
        <div className={styles.creationObject}>
         <RegistrationFrame label="YOUR PRINT / YOUR POINT OF VIEW" />
         <GarmentImage image={garment.image} />
@@ -67,7 +67,7 @@ export function CustomTeaser({ showHeading = true, customHref = "/custom#start" 
          ] as const).map(([symbol, label, x, y]) => <button key={label} type="button" aria-label={label} onClick={() => update({ x: position.x + x, y: position.y + y })}>{symbol}</button>)}</div>
        </div>}
       </div>
-      <div className={styles.creationInfo}>
+      <div className={styles.creationInfo} data-creation-info>
         <p className={styles.micro}>THE SHAPE IS JUST THE START.</p>
         <h3>{printed ? "NOW IT’S\nYOUR IDEA." : "A LITTLE\nPOSSIBILITY."}</h3>
         <p className={styles.body}>{garment.description}</p>

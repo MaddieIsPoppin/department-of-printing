@@ -1,5 +1,19 @@
 # Application architecture
 
+## Implemented V4.1 boundaries
+
+The foundation proposals below are historical context; the development-only V4 storefront now lives under `app/experience-lab/`. V1/V2/V3 and the starter route remain separate references. V4 was checkpointed at `a5ee09f` before V4.1 refinement.
+
+- `data/products.ts`, `media.ts`, `genres.ts` and `garments.ts` remain the real content registries. No demo records are appended to them.
+- `data/demo-products.ts` exports a deterministic generator with explicit source input. Only `/experience-lab/catalogue-preview` imports it at runtime. Removing this route and generator removes the demo capability without changing shopping.
+- `features/experience-lab/catalogue-experience.tsx` owns the shared real/demo archive composition. Existing pure catalogue helpers validate URL state and combine filters; route pages supply the dataset.
+- `editorial-archive.tsx` and `archive.module.css` render server-side masonry columns with reserved image proportions, native links and lazy images. DOM, reading and keyboard order flow down each column. CSS hover/focus enhancement replaces per-card animation listeners; no catalogue videos or new client dependency is introduced.
+- `navigation.ts` supplies header/footer SHOP and CUSTOM destinations. Historical references remain reachable by URL, outside active navigation.
+- `lab.module.css` owns V4 colour, gutter, section-space and section-type tokens. Scoped overrides of the existing custom preview use explicit data attributes, leaving historical visual styles intact.
+- Existing garment response, print reveal and placement logic remain reused. Hero, collection and product-gallery state stay local; no global store or renderer dependency was added.
+
+The audit deliberately retained historical components rather than consolidating incompatible visual generations. The useful extraction was the shared catalogue experience and navigation, not a replacement design framework. No new dependencies were needed.
+
 ## Current foundation
 
 The project uses Next.js 16.3.8, the App Router, React, strict TypeScript, Tailwind CSS 4 and ESLint. Keep the root `app/` structure and existing `@/*` alias. No move to `src/`, template replacement or additional runtime dependencies is needed.
