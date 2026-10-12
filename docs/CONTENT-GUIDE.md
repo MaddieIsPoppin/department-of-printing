@@ -6,6 +6,8 @@ The catalogue is `/catalogue`, custom printing is `/custom`, and each piece has 
 
 ## Where to edit
 
+V4 is a separate development preview at `/experience-lab`, with its own `/experience-lab/catalogue`, `/experience-lab/custom` and `/experience-lab/product/its-slug` routes. It uses the same content data below. See [the V4 handoff](DESIGN-EXPERIENCE-V4.md) for interactions and validation; its visual styles live in `features/experience-lab/lab.module.css`.
+
 | What you want to change | File |
 | --- | --- |
 | Product names, descriptions, prices, options and featured status | `data/products.ts` |
