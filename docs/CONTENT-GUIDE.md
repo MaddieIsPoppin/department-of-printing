@@ -1,5 +1,7 @@
 # Department of Printing: owner content guide
 
+The separate `/custom/studio-preview` now provides a local front/back Print Lab and live 3D texture test. A licensed oversized tee model is still missing; the test surface is explicitly not a garment. See [studio setup, model requirements and licences](GARMENT-STUDIO.md). The existing custom page and product catalogue are unchanged.
+
 V3 is the storefront foundation, not a live ordering service yet. Preview it at **http://localhost:3000/storefront-v3** after running `npm run dev` (`npm.cmd run dev` in Windows PowerShell if needed).
 
 The catalogue is `/catalogue`, custom printing is `/custom`, and each piece has a `/product/its-slug` page. The existing homepage, V1 and `/design-experiments` are preserved. V3 routes are currently available only in development and are marked not to be indexed.

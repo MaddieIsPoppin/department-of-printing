@@ -1,0 +1,48 @@
+.studio { padding: 2rem var(--gutter) 4rem; }
+.intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2rem; }
+.intro h1 { font-size: clamp(3rem,6vw,6rem); line-height: .95; margin-top: 1rem; }
+.intro h1 span { color: #686f58; }
+.intro > p { max-width: 27rem; line-height: 1.8; }
+.meta, .workspace h2 { font: .65rem/1.7 var(--mono); }
+.notice { border: 1px solid var(--ink); padding: 1rem; margin-bottom: 1rem; }
+.notice strong { font: .7rem var(--mono); }
+.notice p { font-size: .8rem; line-height: 1.7; margin-top: .5rem; max-width: 70rem; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: 1rem; border-block: 1px solid var(--line); margin-bottom: 1.5rem; }
+.topbar > div { display: flex; gap: .5rem; }
+.studio button { border: 1px solid var(--ink); padding: .7rem; min-height: 44px; font: .65rem/1.5 var(--mono); }
+.studio button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.studio button:disabled { opacity: .45; cursor: default; }
+.studio label { font: .65rem/1.8 var(--mono); display: flex; gap: .6rem; align-items: center; }
+.studio input { min-width: 0; accent-color: var(--ink); }
+.studio input[type="color"] { width: 44px; height: 44px; }
+.workspace { display: grid; grid-template-columns: 1fr 1fr minmax(13rem,.62fr); gap: 1.25rem; align-items: start; }
+.workspace > * { min-width: 0; }
+.workspace h2 { padding-bottom: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+.editorStage { background: #d9dccf; padding: 1rem; }
+.printArea { position: relative; aspect-ratio: 1; margin-block: 1rem; border: 1px dashed #555; box-shadow: 0 0 0 5px #eeece580; }
+.layer { position: absolute; overflow: visible; touch-action: none; cursor: grab; user-select: none; }
+.layer[data-selected="true"] { outline: 1px dashed #8a411c; outline-offset: 3px; }
+.layer:focus-visible { outline: 3px solid #8a411c; outline-offset: 4px; }
+.empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font: 600 clamp(1.5rem,3vw,3rem)/1 var(--display); color: #595d51; pointer-events: none; }
+.empty small { font: .65rem/1.6 var(--mono); margin-top: 1rem; }
+.scene { height: clamp(20rem,32vw,32rem); background: #d9dccf; }
+.scene > p { padding: 2rem; line-height: 1.8; }
+.start3d { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 2rem; }
+.start3d p { font: 600 clamp(1.5rem,2.5vw,2.5rem)/1.1 var(--display); }
+.camera { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.camera label { width: 100%; }
+.camera input { flex: 1; }
+.help { font: .65rem/1.8 var(--mono); margin-block: 1rem; }
+.controls > button { width: 100%; }
+.upload { flex-direction: column; align-items: stretch !important; border-bottom: 1px solid var(--line); padding-block: 1rem; }
+.upload input { width: 100%; font-size: .65rem; }
+.layers { display: flex; flex-direction: column; gap: .4rem; }
+.layers button { text-align: left; overflow-wrap: anywhere; }
+.adjustments { margin-top: 1rem; display: grid; gap: .75rem; }
+.adjustments label { flex-direction: column; align-items: stretch; }
+.adjustments input:not([type="color"]) { width: 100%; min-height: 40px; }
+.adjustments input[type="text"], .adjustments input[type="number"], .adjustments input:not([type]) { border: 1px solid var(--line); padding: .5rem; }
+.coordinates { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.status { font: .65rem/1.6 var(--mono); overflow-wrap: anywhere; }
+@media (max-width: 1100px) { .workspace { grid-template-columns: 1fr 1fr; } .controls { grid-column: 1 / -1; max-width: 40rem; width: 100%; } }
+@media (max-width: 700px) { .intro { display: block; } .intro > p { margin-top: 1.5rem; font-size: .85rem; } .workspace { display: flex; flex-direction: column; } .workspace > * { width: 100%; } .controls { order: 2; } .viewer { order: 3; } .scene { height: 22rem; } .studio { padding-inline: 1.25rem; } }

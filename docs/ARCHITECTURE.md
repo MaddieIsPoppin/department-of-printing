@@ -1,5 +1,9 @@
 # Application architecture
 
+## Garment studio preview
+
+`/custom/studio-preview` composes `features/garment-studio/` without changing the original custom page. Its plain TypeScript design document owns front/back layers and constrained placement. SVG editing and a dynamically loaded React Three Fiber renderer consume that document independently; the 2D editor does not require WebGL. A calibrated-model adapter is defined, but no licensed garment asset is bundled: the visible fallback is a labelled flat texture test surface. See [GARMENT-STUDIO.md](GARMENT-STUDIO.md) for module boundaries, asset requirements, validation and licensing.
+
 ## Implemented V4.1 boundaries
 
 The foundation proposals below are historical context; the development-only V4 storefront now lives under `app/experience-lab/`. V1/V2/V3 and the starter route remain separate references. V4 was checkpointed at `a5ee09f` before V4.1 refinement.
