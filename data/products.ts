@@ -15,6 +15,8 @@ export type Product = {
   available: boolean | null; // Null is unknown, not in stock.
   colours: string[]; // Verified purchasable options only, not colours seen in renders.
   sizes: string[];
+  // Optional explicit combinations. When present, these override the size/colour cross-product.
+  variants?: { id: string; size: string; colour: string; available: boolean }[];
   media: ProductMedia;
   description: string;
 };

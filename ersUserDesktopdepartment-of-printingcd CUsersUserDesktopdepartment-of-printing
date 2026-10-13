@@ -1,0 +1,39 @@
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/(storefront)/catalogue/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/(storefront)/custom/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/(storefront)/custom/studio-preview/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/(storefront)/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/(storefront)/product/[slug]/not-found.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/(storefront)/product/[slug]/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'data/products.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/ARCHITECTURE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/CONTENT-GUIDE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'features/experience-lab/catalogue-experience.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'features/experience-lab/collection-stage.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'features/experience-lab/editorial-archive.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'features/experience-lab/hero.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'features/garment-studio/studio.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'features/storefront/custom-teaser.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+ .gitignore                                       |  1 [32m+[m
+ app/(storefront)/catalogue/page.tsx              | 44 [32m+++[m[31m------------[m
+ app/(storefront)/custom/page.tsx                 | 24 [32m++++[m[31m-----[m
+ app/(storefront)/custom/studio-preview/page.tsx  |  6 [32m+[m[31m--[m
+ app/(storefront)/layout.tsx                      | 20 [32m+[m[31m------[m
+ app/(storefront)/product/[slug]/not-found.tsx    |  7 [32m+[m[31m--[m
+ app/(storefront)/product/[slug]/page.tsx         | 44 [32m++++++[m[31m---------[m
+ app/(storefront)/storefront-v3/page.tsx          |  9 [31m----[m
+ app/layout.tsx                                   |  6 [32m++[m[31m-[m
+ app/page.tsx                                     | 69 [31m------------------------[m
+ data/products.ts                                 |  2 [32m+[m
+ docs/ARCHITECTURE.md                             |  6 [32m+++[m
+ docs/CONTENT-GUIDE.md                            | 10 [32m++++[m
+ features/experience-lab/catalogue-experience.tsx |  8 [32m+[m[31m--[m
+ features/experience-lab/collection-stage.tsx     |  6 [32m+[m[31m--[m
+ features/experience-lab/editorial-archive.tsx    |  4 [32m+[m[31m-[m
+ features/experience-lab/hero.tsx                 |  6 [32m+[m[31m--[m
+ features/garment-studio/studio.tsx               |  9 [32m+++[m[31m-[m
+ features/storefront/custom-teaser.tsx            |  4 [32m+[m[31m-[m
+ package.json                                     |  3 [32m+[m[31m-[m
+ 20 files changed, 87 insertions(+), 201 deletions(-)

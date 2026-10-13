@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { emptyDesign, updateLayer, constrainLayer, type Side, type Layer } from "./design";
 import { readArtwork } from "./artwork";
@@ -8,7 +9,8 @@ import { studioGarment } from "./garment-config";
 import styles from "./studio.module.css";
 
 const Scene = dynamic(() => import("./scene"), { ssr: false, loading: () => <p>Preparing the 3D preview…</p> });
-export function GarmentStudio() {
+export function GarmentStudio({ quoteHref }: { quoteHref?: string }) {
+  const router = useRouter();
   const [design, setDesign] = useState(emptyDesign);
   const [side, setSide] = useState<Side>("front");
   const [selected, setSelected] = useState<string | null>(null);
@@ -28,6 +30,11 @@ export function GarmentStudio() {
   return <main id="content" className={styles.studio}>
     <header className={styles.intro}><div><p className={styles.meta}>DEPARTMENT OF PRINTING / STUDIO PREVIEW 001</p><h1>MAKE IT<br /><span>YOUR OWN.</span></h1></div><p>One idea. Both sides.<br />Place your artwork, refine the details, explore it in space. Everything stays in this browser tab.</p></header>
     <div className={styles.notice}><strong>{studioGarment.name} / {studioGarment.model ? "MODEL PREVIEW" : "GARMENT MODEL NOT YET AVAILABLE"}</strong><p>{studioGarment.model ? "Preview mapping requires production approval." : "The editor is working. The 3D panel shows a flat, two-sided print test surface—not a T-shirt. A licensed oversized garment model and verified print mapping are still required."} Colours and print bounds are illustrative, not supplier specifications. Refreshing clears your work.</p></div>
+    {quoteHref && <p className={styles.help}>Requesting a quotation transfers a text-only summary and leaves the studio. Keep your original artwork files; images and editable layers are not saved.</p>}
+    {quoteHref && <button onClick={() => {
+      const summary = ["Studio preview: " + studioGarment.name, "Colour request: " + design.colour, ...(["front", "back"] as const).flatMap(face => design[face].map(item => `${face}: ${item.kind === "text" ? (item.text || "Text").slice(0, 60) : "Image artwork"}; x ${Math.round(item.x * 100)}%, y ${Math.round(item.y * 100)}%, width ${Math.round(item.width * 100)}%, height ${Math.round(item.height * 100)}%, rotation ${Math.round(item.rotation)}°`))].join("\n").slice(0, 1900);
+      try { sessionStorage.setItem("dop-studio-summary", summary); router.push(quoteHref); } catch { setMessage("Your browser could not transfer the summary. Open Custom printing and describe your design; your artwork has not been uploaded."); }
+    }}>REQUEST A QUOTATION / TRANSFER DESIGN SUMMARY ↗</button>}
     <div className={styles.topbar}><div role="group" aria-label="Print side">{(["front", "back"] as const).map(value => <button key={value} aria-pressed={side === value} onClick={() => changeSide(value)}>{value.toUpperCase()} / {design[value].length}</button>)}</div><label>GARMENT COLOUR <input type="color" value={design.colour} onChange={event => setDesign(current => ({ ...current, colour: event.target.value }))} /></label><button onClick={() => { uploadGeneration.current++; setUploading(false); setDesign(emptyDesign()); setSelected(null); setMessage("Both sides reset."); }}>RESET BOTH SIDES</button></div>
     <div className={styles.workspace}>
       <section className={styles.editor} aria-label="2D Print Lab"><h2>01 / THE PRINT LAB</h2><PrintEditor layers={design[side]} selected={selected} colour={design.colour} select={setSelected} update={update} /></section>

@@ -8,7 +8,7 @@ import { constrainPlacement, initialPlacement, type Placement } from "./print-pl
 import styles from "./storefront.module.css";
 import { RegistrationFrame } from "./registration-frame";
 
-export function CustomTeaser({ showHeading = true, customHref = "/custom#start" }: { showHeading?: boolean; customHref?: string }) {
+export function CustomTeaser({ showHeading = true, customHref = "/custom#start", actionLabel = "START A CUSTOM ORDER" }: { showHeading?: boolean; customHref?: string; actionLabel?: string }) {
   const [selected, setSelected] = useState(0);
   const [printed, setPrinted] = useState(false);
   const [position, setPosition] = useState(initialPlacement);
@@ -73,7 +73,7 @@ export function CustomTeaser({ showHeading = true, customHref = "/custom#start" 
         <p className={styles.body}>{garment.description}</p>
         <p className={styles.help}>Interactive preview, not a production proof. The tee is blank; hoodie and sweatshirt views are finished studies.</p>
         <p className={styles.help} id="print-help">{printed ? "Drag the sample, or select it and use your keyboard arrows. Just a little play — nothing is saved." : "Tap to try our sample artwork. No upload. No design experience needed."}</p>
-        <Link className={styles.action} href={customHref}>START A CUSTOM ORDER <span>↗</span></Link>
+        <Link className={styles.action} href={customHref}>{actionLabel} <span>↗</span></Link>
         <noscript><p className={styles.help}>The sample needs JavaScript. You can still explore our custom printing service.</p></noscript>
       </div>
     </div>

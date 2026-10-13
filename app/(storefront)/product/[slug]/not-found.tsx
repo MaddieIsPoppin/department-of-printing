@@ -1,6 +1,3 @@
 import Link from "next/link";
-import styles from "@/features/storefront/storefront.module.css";
-
-export default function MissingPiece() {
-  return <main id="content" className={styles.pageHeading}><p className={styles.micro}>PIECE NOT FOUND</p><h1>TRY ANOTHER<br />POINT OF VIEW.</h1><Link className={styles.action} href="/catalogue">BACK TO THE CATALOGUE ↗</Link></main>;
-}
+import styles from "@/features/experience-lab/lab.module.css";
+export default function MissingPiece() { return <main id="content" className={styles.page}><div className={styles.pageIntro}><p className={styles.meta}>404 / PIECE NOT FOUND</p><h1>ANOTHER<br />DIRECTION.</h1><Link className={styles.textLink} href="/catalogue">EXPLORE THE COLLECTION ↗</Link></div></main>; }

@@ -1,5 +1,11 @@
 # Application architecture
 
+## V5 authoritative application
+
+V5 promotes the V4.1 composition into `app/(storefront)` with the shared `features/site` shell. Public routes are `/`, `/catalogue`, `/product/[slug]`, `/custom`, `/custom/studio`, `/about`, `/contact`, `/cart` and `/policies`. Historical routes remain separate development references; subsequent generation-specific sections below are historical context.
+
+`features/commerce` owns validated variants/bag math and browser persistence. `features/enquiries` owns input validation, shared forms, server-only configuration and private durable recording/delivery. `/api/enquiries` enforces origin/body limits and resolves prices from real data before using the server-only provider. V4 presentation accepts route configuration without duplicating its design. Studio state remains renderer-independent; only a text summary travels into custom quotations. See [V5 implementation and configuration](V5-IMPLEMENTATION.md) for contracts, tests and launch blockers.
+
 ## Garment studio preview
 
 `/custom/studio-preview` composes `features/garment-studio/` without changing the original custom page. Its plain TypeScript design document owns front/back layers and constrained placement. SVG editing and a dynamically loaded React Three Fiber renderer consume that document independently; the 2D editor does not require WebGL. A calibrated-model adapter is defined, but no licensed garment asset is bundled: the visible fallback is a labelled flat texture test surface. See [GARMENT-STUDIO.md](GARMENT-STUDIO.md) for module boundaries, asset requirements, validation and licensing.

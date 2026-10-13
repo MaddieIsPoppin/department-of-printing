@@ -1,5 +1,15 @@
 # Department of Printing: owner content guide
 
+## Current application: V5
+
+The authoritative site now starts at `/`. Use `/catalogue`, `/product/its-slug`, `/custom`, `/custom/studio`, `/about`, `/contact` and `/cart`. Prior V3/V4 preview URLs below remain historical references. Run `npm.cmd run dev`; read [V5 setup and launch requirements](V5-IMPLEMENTATION.md) before enabling real enquiries.
+
+Real products still live in `data/products.ts`, images in `data/media.ts`, genres in `data/genres.ts`, and garment types in `data/garments.ts`. Add images under `public/`, update dimensions/alt text in the media registry, and reference that media from the product. Assign registered genre IDs and the garment ID matching the image. Do not add demo records to this array.
+
+Bag eligibility requires verified price, `available: true`, and valid size/colour combinations. Prefer explicit `variants` with stable IDs and per-combination availability. Without `variants`, all combinations of supplied sizes/colours are treated as verified. Existing unconfirmed products intentionally offer enquiries instead of Add to bag. No prices or stock were invented.
+
+Edit public navigation in `features/site/navigation.ts`, V4.1 visual tokens in `features/experience-lab/lab.module.css`, and unified forms/buttons/shell styles in `features/site/site.module.css`. Business contacts and server enquiry settings use `.env.local` according to `.env.example`; never put credentials in product data or client components. Privacy/delivery/returns pages currently identify missing owner policies, not approved terms.
+
 The separate `/custom/studio-preview` now provides a local front/back Print Lab and live 3D texture test. A licensed oversized tee model is still missing; the test surface is explicitly not a garment. See [studio setup, model requirements and licences](GARMENT-STUDIO.md). The existing custom page and product catalogue are unchanged.
 
 V3 is the storefront foundation, not a live ordering service yet. Preview it at **http://localhost:3000/storefront-v3** after running `npm run dev` (`npm.cmd run dev` in Windows PowerShell if needed).

@@ -6,10 +6,10 @@ import { garmentLabel } from "@/data/garments";
 import { genreLabel } from "@/data/genres";
 import styles from "./archive.module.css";
 
-export function EditorialArchive({ products }: { products: (Product | DemoProduct)[] }) {
+export function EditorialArchive({ products, basePath = "/experience-lab" }: { products: (Product | DemoProduct)[]; basePath?: string }) {
   return <div className={styles.archive}>{products.map((product, index) => {
     const demo = "sourceSlug" in product;
-    const href = `/experience-lab/product/${demo ? product.sourceSlug : product.slug}`;
+    const href = `${basePath}/product/${demo ? product.sourceSlug : product.slug}`;
     const alternate = product.media.details?.find(image => image.src !== product.media.cover.src)
       ?? (product.media.front?.src !== product.media.cover.src ? product.media.front : undefined);
     const sizes = "(min-width: 1700px) 30vw, (min-width: 1200px) 40vw, (min-width: 850px) 55vw, (min-width: 560px) 80vw, 160vw";
